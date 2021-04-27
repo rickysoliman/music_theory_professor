@@ -1,21 +1,24 @@
 import './App.css';
-import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton';
 import Profile from './components/Profile';
+import LandingPage from './components/LandingPage';
 import { useAuth0 } from '@auth0/auth0-react';
 
 function App() {
-  const { isLoading } = useAuth0();
+  const { isLoading, isAuthenticated } = useAuth0();
 
-  if (isLoading) return <div>...Loading</div>
+  if (isLoading) return <div style={{color: 'white;'}}>Loading...</div>;
 
-  return (
-    <>
-      <LoginButton/>
-      <LogoutButton/>
+  if (isAuthenticated) {
+    return (
       <Profile/>
-    </>
-  );
+    );
+  } else {
+    return (
+      <LandingPage/>
+    )
+  }
+
+
 }
 
 export default App;
