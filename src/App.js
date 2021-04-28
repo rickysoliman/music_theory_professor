@@ -1,6 +1,6 @@
 import './App.css';
-import Profile from './components/Profile';
 import LandingPage from './components/LandingPage';
+import LoggedIn from './components/LoggedIn';
 import { useAuth0 } from '@auth0/auth0-react';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
 
   if (isAuthenticated) {
     return (
-      <Profile/>
+      <LoggedIn/>
     );
   } else {
     return (

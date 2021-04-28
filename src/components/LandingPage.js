@@ -9,7 +9,7 @@ import Footer from './Footer';
 
 const LandingPage = () => {
     return (
-        <div id="pageContainer">
+        <div id="landingPageContainer">
             <div id="landingPage">
                 <HashRouter>
                     <div id="navBar">
