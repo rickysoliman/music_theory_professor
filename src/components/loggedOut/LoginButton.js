@@ -6,9 +6,9 @@ const LoginButton = () => {
 
     return (
         !isAuthenticated && (
-            <a href="/" id="loginButton" onClick={() => loginWithRedirect()}>
+            <button href="/" id="loginButton" onClick={() => loginWithRedirect()}>
                 Login/Register
-            </a>
+            </button>
         )
     );
 }

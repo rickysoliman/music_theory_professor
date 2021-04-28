@@ -6,7 +6,7 @@ const LogoutButton = () => {
     
     return (
         isAuthenticated && (
-            <button onClick={() => logout()}>
+            <button id="logoutButton" className="navLink" onClick={() => logout()}>
                 Log Out
             </button>
         )
