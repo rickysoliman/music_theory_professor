@@ -28,7 +28,8 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   position: relative;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  height: fit-content;
   width: 100%;
 }
 
@@ -37,7 +38,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  height: fit-content;
 }
 
 #profile {
@@ -104,13 +106,11 @@ body {
 }
 
 #footerLogo img {
-  float: left;
-  color: white;
   width: 100px;
   height: 100px;
 }
 
-.github img {
+.footerLinkImage img {
   width: 65px;
   height: 65px;
 }
@@ -139,6 +139,14 @@ a:visited {
 a:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+#loggedOutContent {
+  height: fit-content;
+}
+
+#loggedInContent {
+  min-height: 100vh;
 }
 
 #loginButton {
@@ -180,7 +188,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin: 50px;
+  margin: 20px;
   box-shadow: 10px 5px 5px black;
   border: transparent;
   text-align: center;
@@ -223,6 +231,13 @@ a:hover {
   margin: 50px;
 }
 
+#learnIntervals {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+}
+
 #about {
   display: flex;
   justify-content: center;
@@ -242,6 +257,8 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #e4ca9e;
+  min-height: 100vh;
 }
 
 @media (max-width: 1000px) {

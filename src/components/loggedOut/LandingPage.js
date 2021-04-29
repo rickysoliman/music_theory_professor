@@ -5,7 +5,7 @@ import {
     HashRouter
 } from "react-router-dom";
 import Home from '../Home';
-import About from './About';
+import About from '../About';
 import Footer from '../Footer';
 import MoreLandingPageInfo from './MoreLandingPageInfo';
 
@@ -23,7 +23,7 @@ const LandingPage = () => {
                             <NavLink className="navLink" exact to="/">Home</NavLink>
                         </div>
                     </div>
-                    <div id="content">
+                    <div id="loggedOutContent">
                         <Route exact path="/" component={Home}/>
                         <Route path="/about" component={About}></Route>
                     </div>

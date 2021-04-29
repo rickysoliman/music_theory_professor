@@ -1,4 +1,5 @@
 import React from 'react';
+import LoginButton from './loggedOut/LoginButton';
 
 const About = () => {
     const description = `
@@ -28,6 +29,7 @@ const About = () => {
                         <img id="linkedinAbout" alt="LinkedIn" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/LI-In-Bug.png"></img>
                     </a>
                 </div>
+                <LoginButton message='Get started with Music Theory Professor' />
             </div>
         </div>
     )

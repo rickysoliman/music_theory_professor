@@ -21,7 +21,17 @@ const MoreLandingPageInfo = () => {
                 </div>
                 <h3 style={{ margin: '20px' }}>Maybe you're a little more advanced? <br></br>Quiz yourself on chord structure!</h3>
             </div>
-            <LoginButton />
+            <div>
+                <div id="learnIntervals">
+                    <h3>If you're really an expert, <br></br>Test your knowledge of intervals too!</h3>
+                    <img alt="intervals" style={{ borderRadius: '5px', border: '3px solid black', margin: '20px' }} src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/major+third.jpg"></img>
+                </div>
+            </div>
+            <h3 style={{
+                width: '30%',
+                margin: '20px'
+            }}><b>Music Theory Professor</b> will help you ace your music theory courses, or just help you get better at piano, guitar or any instrument you desire!</h3>
+            <LoginButton message='Click here to get started!' />
         </div>
     );
 };

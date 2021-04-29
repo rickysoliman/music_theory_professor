@@ -16,7 +16,7 @@ const Home = () => {
                 <div className="infoSquare">
                     <h3>Music Theory Professor</h3>
                     <p>is the best place to test your music theory knowledge and ear training abilities.</p>
-                    <LoginButton />
+                    <LoginButton message='Get Started!' />
                 </div>
             </div>
         )
