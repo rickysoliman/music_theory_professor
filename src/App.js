@@ -7,7 +7,13 @@ function App() {
   const { isLoading, isAuthenticated } = useAuth0();
 
   // performing get request
-  if (isLoading) return <div style={{color: 'white;'}}>Loading...</div>;
+  if (isLoading) return <div style={{ 
+    color: 'white',
+    fontFamily: 'cursive',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }}>Loading...</div>;
 
   // logged in
   if (isAuthenticated) {

@@ -7,7 +7,7 @@ import {
 import Home from '../Home';
 import About from './About';
 import Footer from '../Footer';
-import LoginButton from './LoginButton';
+import MoreLandingPageInfo from './MoreLandingPageInfo';
 
 const LandingPage = () => {
     return (
@@ -15,7 +15,7 @@ const LandingPage = () => {
             <div id="landingPage">
                 <HashRouter>
                     <div id="navBar">
-                        <NavLink id="logo" exact to="/">
+                        <NavLink id="navBarLogo" exact to="/">
                             <img alt="Music Theory Professor" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/musictheorylogo.png"></img>
                         </NavLink>
                         <div id="navLinks">
@@ -29,9 +29,7 @@ const LandingPage = () => {
                     </div>
                 </HashRouter>
             </div>
-            <div id="moreLandingPageInfo">
-                <LoginButton/>
-            </div>
+            <MoreLandingPageInfo/>
             <Footer/>
         </div>
     )

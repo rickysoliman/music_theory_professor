@@ -28,7 +28,6 @@ const LoggedIn = () => {
                     <Route path="/profile" component={Profile}></Route>
                 </div>
             </HashRouter>
-            {/* <Profile/> */}
             <Footer/>
         </div>
     );
