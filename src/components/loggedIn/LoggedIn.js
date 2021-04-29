@@ -9,6 +9,9 @@ import Home from '../Home';
 import Profile from './Profile';
 import Footer from '../Footer';
 import About from '../About';
+import Quizzes from './quizzes/Quizzes';
+import Courses from './courses/Courses';
+import NavigationButton from './NavigationButton';
 
 const LoggedIn = () => {
     return (
@@ -25,10 +28,20 @@ const LoggedIn = () => {
                         <NavLink className="navLink" exact to="/">Home</NavLink>
                     </div>
                 </div>
+                <div id="navButtons">
+                    <NavLink className="navLink" to="/quizzes">{
+                        <NavigationButton type='Quizzes' />
+                    }</NavLink>
+                    <NavLink className="navLink" to="/courses">{
+                        <NavigationButton type='Courses' />
+                    }</NavLink>
+                </div>
                 <div id="loggedInContent">
-                    <Route exact path="/" component={Home} />
-                    <Route path="/profile" component={Profile}></Route>
-                    <Route path="/about" component={About}></Route>
+                    <Route path="/quizzes" component={Quizzes}/>
+                    <Route path="/courses" component={Courses} />
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/profile" component={Profile}/>
+                    <Route path="/about" component={About}/>
                 </div>
             </HashRouter>
             <Footer/>

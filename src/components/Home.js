@@ -3,15 +3,20 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './loggedOut/LoginButton';
 
 const Home = () => {
-    const { isAuthenticated } = useAuth0();
-
+    const { isAuthenticated, user } = useAuth0();
+    console.log(user);
     // logged in
     if (isAuthenticated) {
-        return <div>Home</div>
+        return (
+            <div id="loggedInHomePage">
+                <h1>Welcome back, {user.given_name || user.nickname}!</h1>
+                <p>{user.email_verified ? '' : 'Make sure to verify your email.'}</p>
+            </div>
+        )
     // not logged in
     } else {
         return (
-            <div id="homePage">
+            <div id="loggedOutHomePage">
                 <div id="header">Level up your Music Theory skills today!</div>
                 <div className="infoSquare">
                     <h3>Music Theory Professor</h3>

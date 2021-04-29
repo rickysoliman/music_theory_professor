@@ -25,7 +25,7 @@ const LandingPage = () => {
                     </div>
                     <div id="loggedOutContent">
                         <Route exact path="/" component={Home}/>
-                        <Route path="/about" component={About}></Route>
+                        <Route path="/about" component={About}/>
                     </div>
                 </HashRouter>
             </div>
