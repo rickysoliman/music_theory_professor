@@ -9,7 +9,7 @@ import Home from '../Home';
 import Profile from './Profile';
 import Footer from '../Footer';
 import About from '../About';
-import Quizzes from './quizzes/Quizzes';
+import QuizMenu from './quizzes/QuizMenu';
 import Courses from './courses/Courses';
 import NavigationButton from './NavigationButton';
 
@@ -37,7 +37,7 @@ const LoggedIn = () => {
                     }</NavLink>
                 </div>
                 <div id="loggedInContent">
-                    <Route path="/quizzes" component={Quizzes}/>
+                    <Route path="/quizzes" component={QuizMenu}/>
                     <Route path="/courses" component={Courses} />
                     <Route exact path="/" component={Home}/>
                     <Route path="/profile" component={Profile}/>

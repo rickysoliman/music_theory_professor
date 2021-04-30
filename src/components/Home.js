@@ -9,8 +9,8 @@ const Home = () => {
     if (isAuthenticated) {
         return (
             <div id="loggedInHomePage">
-                <h1>Welcome back, {user.given_name || user.nickname}!</h1>
-                <p>{user.email_verified ? '' : 'Make sure to verify your email.'}</p>
+                <h1 style={{ color: 'white' }}>Welcome back, {user.given_name || user.nickname}!</h1>
+                <p style={{ color: 'white' }}>{user.email_verified ? '' : 'Make sure to verify your email.'}</p>
             </div>
         )
     // not logged in
