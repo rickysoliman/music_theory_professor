@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
+import { useSpring, animated } from 'react-spring';
 import Quiz from './quizzes/Quiz';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
@@ -51,6 +52,18 @@ const CloseModalButton = styled(MdClose)`
 `;
 
 const Modal = props => {
+    let showModal = props.quizType !== null;
+
+    const modalRef = useRef();
+
+    const animation = useSpring({
+        config: {
+            duration: 250
+        },
+        opacity: showModal ? 1 : 0,
+        transform: showModal ? `translateY(0%)` : `translateY(-100%)`
+    });
+
     const areYouSure = () => {
         const response = window.confirm('Are you sure you want to exit this quiz?');
         if (response) window.location.href = '/';
@@ -59,12 +72,14 @@ const Modal = props => {
     return props.quizType ? (
 
         <Background>
-            <ModalWrapper showModal={props.quizType !== null}>
-                <ModalContent>
-                    <Quiz quizType={props.quizType}/>
-                </ModalContent>
-                <CloseModalButton aria-label="Close modal" onClick={areYouSure}>X</CloseModalButton>
-            </ModalWrapper>
+            <animated.div style={animation}>
+                <ModalWrapper showModal={showModal}>
+                    <ModalContent>
+                        <Quiz quizType={props.quizType}/>
+                    </ModalContent>
+                    <CloseModalButton aria-label="Close modal" onClick={areYouSure}>X</CloseModalButton>
+                </ModalWrapper>
+            </animated.div>
         </Background>
 
     ) : null;
