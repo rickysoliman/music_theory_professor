@@ -315,6 +315,12 @@ a:hover {
   background-color: #e4ca9e;
 }
 
+/* .quiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 @media (max-width: 1000px) {
   #landingPageContainer {
     min-height: 200%;

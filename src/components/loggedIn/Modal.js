@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import Quiz from './quizzes/Quiz';
 import styled from 'styled-components';
@@ -22,10 +22,10 @@ const ModalWrapper = styled.div`
     width: 90vw;
     height: 90vh;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-    background: #fff;
+    background-color: #e4ca9e;
     color: #000;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    // grid-template-columns: 1fr 1fr;
     position: relative;
     z-index: 10;
     border-radius: 10px;
@@ -33,11 +33,12 @@ const ModalWrapper = styled.div`
 
 const ModalContent = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     line-height: 1.8;
     color: #141414;
+    width: 100%;
 `;
 
 const CloseModalButton = styled(MdClose)`
@@ -54,9 +55,7 @@ const CloseModalButton = styled(MdClose)`
 const Modal = props => {
     let showModal = props.quizType !== null;
 
-    if (showModal) {
-        document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
-    }
+    if (showModal) document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
 
     const modalRef = useRef();
 
@@ -73,7 +72,7 @@ const Modal = props => {
         if (response) window.location.href = '/';
     };
 
-    return props.quizType ? (
+    return showModal ? (
 
         <Background ref={modalRef}>
             <animated.div style={animation}>
