@@ -54,6 +54,10 @@ const CloseModalButton = styled(MdClose)`
 const Modal = props => {
     let showModal = props.quizType !== null;
 
+    if (showModal) {
+        document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
+    }
+
     const modalRef = useRef();
 
     const animation = useSpring({
@@ -71,7 +75,7 @@ const Modal = props => {
 
     return props.quizType ? (
 
-        <Background>
+        <Background ref={modalRef}>
             <animated.div style={animation}>
                 <ModalWrapper showModal={showModal}>
                     <ModalContent>
