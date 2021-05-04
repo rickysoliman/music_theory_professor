@@ -4,12 +4,13 @@ const cors = require("cors");
 const PORT = 4000;
 const mongoose = require("mongoose");
 const router = express.Router();
-let detail = require("./model");
-
+const user = require("./model");
 
 app.use(cors());
 
-mongoose.connect("mongodb://127.0.0.1:27017/details", {
+// 'mongodb://username:password@host:port/database'
+
+mongoose.connect("mongodb://localhost:27017/user", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -23,7 +24,7 @@ connection.once("open", function () {
 app.use("/", router);
 
 router.route("/getData").get(function (req, res) {
-    detail.find({}, function (err, result) {
+    user.find({}, function (err, result) {
         if (err) {
             res.send(err);
         } else {
