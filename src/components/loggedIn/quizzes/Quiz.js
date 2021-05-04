@@ -121,13 +121,13 @@ class Quiz extends Component {
             this.setState({
                 index, 
                 answers,
-                pendingAnswer: null
+                pendingAnswer: this.props.quizType === 'Chords' ? [] : null
             });
         }
     }
 
-    deselect = () => {
-        this.setState({ pendingAnswer: null });
+    deselect = note => {
+        this.setState({ pendingAnswer: this.props.quizType === 'Chords' ? [note] : note });
     }
 
     begin = () => {
@@ -203,7 +203,7 @@ class Quiz extends Component {
             };
             return (
                 <div className='quiz'>
-                    <p className="subMessage">{subMessages[this.props.quizType]}</p>
+                    <p className="subMessage">{`${index + 1}.`} {subMessages[this.props.quizType]}</p>
                     <div className='question'>{questions[index]}</div>
                     <Piano mostRecentlySelected={this.mostRecentlySelected} selectionLimit={this.state.noteLimit[this.props.quizType]} deselect={this.deselect} submitAnswer={this.submitAnswer} onClick={this.handleClick}/>
                 </div>

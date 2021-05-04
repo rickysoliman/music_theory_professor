@@ -58,95 +58,24 @@ class Piano extends Component {
         let selectionLimit = this.props.selectionLimit;
         let areAnySelected = this.areAnySelected();
 
-        // all notes will toggle their state when clicked
-        // regardless of the state of the rest of the board
-
-        // when a note is clicked, we have to check if 
-        // any other notes have been previously clicked
-
-        // if they have:
-        if (areAnySelected) {
-            // check if the number of selected notes is equal to
-            // the selectionLimit
-            // if we've reached the selectionLimit:
-            if (areAnySelected.length === selectionLimit) {
-                // reset the board
-                // select note as selected
-                this.resetBoard();
-                this.setState({
-                    [note]: true
-                });
-            // if we haven't reached the selectionLimit:
-            } else {
-                // toggle the state of the selected note
-                this.setState({
-                    [note]: !this.state[note]
-                });
+        if (selectionLimit > 1) {
+            if (areAnySelected) {
+                if (areAnySelected.includes(note)) return null;
+                if (areAnySelected.length === selectionLimit) {
+                    this.resetBoard(() => this.props.deselect(note));
+                };
             };
-        // if they have not:
         } else {
-            // toggle the state of the selected note
-            this.setState({
-                [note]: !this.state[note]
-            });
+            if (areAnySelected) {
+                this.resetBoard(() => this.props.deselect(note));
+            };
         };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // // note is equal to the note that was clicked
-        // let note = e.target.id;
-        // // selectionLimit is equal to the number of notes a user is allowed to select
-        // let selectionLimit = this.props.selectionLimit;
-        // // determines if any other notes have been previously selected (array of notes if true, false if false)
-        // let areAnySelected = this.areAnySelected();
-        // // if any notes have been selected
-        // if (areAnySelected) {
-        //     // if we've reached the selection limit, return out of function
-        //     if (areAnySelected.length === selectionLimit) return null;
-        //     // if the note that's been selected has already been previously selected
-        //     if (areAnySelected.includes(note)) {
-        //         // if it's the only note that's been selected
-        //         if (areAnySelected.length === 1) {
-        //             // reset the board
-        //             this.resetBoard(this.props.deselect);
-        //         // otherwise: the selected note has been previously selected along with at least one other note
-        //         } else {
-        //             // deselect just the selected note
-        //             this.setState({ [note]: false });
-        //             this.props.deselect();
-        //         }
-        //     // otherwise: the note that's been selected was not previously selected
-        //     } else {
-        //         this.resetBoard();
-        //         this.setState({
-        //             [note]: true
-        //         });
-        //     }
-        // } else {
-        //     this.setState({
-        //         [note]: true
-        //     });
-        // }
+        this.setState({ [note]: true });
 
         this.props.onClick(note);
-        // let audio = document.getElementById(`${note}note`);
-        // audio.play();
-    }
+        let audio = document.getElementById(`${note}note`);
+        audio.play();
+    };
 
     areAnySelected = () => {
         let selectedNotes = [];
