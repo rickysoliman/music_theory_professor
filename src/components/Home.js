@@ -11,6 +11,7 @@ const Home = () => {
             <div id="loggedInHomePage">
                 <h1 style={{ color: 'white' }}>Welcome back, {user.given_name || user.nickname}!</h1>
                 <p style={{ color: 'white' }}>{user.email_verified ? '' : 'Make sure to verify your email.'}</p>
+
             </div>
         )
     // not logged in
