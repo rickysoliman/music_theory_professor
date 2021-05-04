@@ -8,6 +8,9 @@ import Home from '../Home';
 import About from '../About';
 import Footer from '../Footer';
 import MoreLandingPageInfo from './MoreLandingPageInfo';
+import QuizMenu from '../loggedIn/quizzes/QuizMenu';
+import Profile from '../loggedIn/Profile';
+
 
 const LandingPage = () => {
     return (
@@ -26,6 +29,8 @@ const LandingPage = () => {
                     <div id="loggedOutContent">
                         <Route exact path="/" component={Home}/>
                         <Route path="/about" component={About}/>
+                        <Route path="/quizzes" component={QuizMenu}/>
+                        <Route path="/profile" component={Profile}/>
                     </div>
                 </HashRouter>
             </div>

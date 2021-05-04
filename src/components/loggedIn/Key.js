@@ -4,25 +4,30 @@ import styled from 'styled-components';
 const WhiteKey = styled.div`
     width: 100px;
     height: 400px;
-    background-color: ${props => props.selected ? '#EE82EE' : 'white'};
-    border: ${props => props.selected ? '5px solid #FF00FF' : '1px solid black'};
+    background-color: ${props => props.selected ? '#563a07' : '#f1e4cf'};
+    border: 2px solid black;
+    border-radius: ${props => {
+        if (props.id === 'C') return '5px 0px 0px 5px';
+        else if (props.id === 'B') return '0px 5px 5px 0px';
+    }};
     &:hover {
         cursor: pointer;
-        background-color: ${props => props.selected ? '#EE82EE' : '#D3D3D3'};
+        background-color: ${props => props.selected ? '#563a07' : '#D3D3D3'};
     }
 `;
 
 const BlackKey = styled.div`
     width: 60px;
     height: 240px;
-    background-color: ${props => props.selected ? '#EE82EE' : 'black'};
+    background-color: ${props => props.selected ? '#563a07' : '#191414'};
     margin-left: -30px;
     margin-right: -30px;
     z-index: 2;
-    border: ${props => props.selected ? '5px solid #FF00FF' : '2px solid black'};
+    border: 3px solid black;
+    border-radius: 0px 0px 7px 7px;
     &:hover {
         cursor: pointer;
-        background-color: ${props => props.selected ? '#EE82EE' : '#D3D3D3'};
+        background-color: ${props => props.selected ? '#563a07' : '#424242'};
     }
 `;
 

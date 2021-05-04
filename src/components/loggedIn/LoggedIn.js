@@ -4,6 +4,7 @@ import {
     NavLink,
     HashRouter
 } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
 import LogoutButton from './LogoutButton';
 import Home from '../Home';
 import Profile from './Profile';
@@ -14,6 +15,7 @@ import Courses from './courses/Courses';
 import NavigationButton from './NavigationButton';
 
 const LoggedIn = () => {
+    const { isAuthenticated } = useAuth0();
     return (
         <div id="loggedInContainer">
             <HashRouter>
@@ -37,7 +39,7 @@ const LoggedIn = () => {
                     }</NavLink>
                 </div>
                 <div id="loggedInContent">
-                    <Route path="/quizzes" component={QuizMenu}/>
+                    <Route path="/quizzes" render={() => <QuizMenu authenticated={isAuthenticated}/>}/>
                     <Route path="/courses" component={Courses} />
                     <Route exact path="/" component={Home}/>
                     <Route path="/profile" component={Profile}/>

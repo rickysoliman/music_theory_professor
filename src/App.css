@@ -158,7 +158,7 @@ a:hover {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
 }
 
 #loginButton {
@@ -315,11 +315,61 @@ a:hover {
   background-color: #e4ca9e;
 }
 
-/* .quiz {
+.mustLogIn {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-} */
+  width: 100%;
+  height: 50%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 2rem;
+  margin: 50px;
+}
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.question {
+  font-family: Arial;
+  text-decoration: bold;
+  font-size: 2.5rem;
+}
+
+.quizIntro {
+  text-align: center;
+  width: 50%;
+  margin: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.quizButton {
+  float: right;
+  color: #f7ecdb;
+  background-color: #1a1515;
+  border-radius: 5px;
+  border: transparent;
+  padding: 20px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  transition: box-shadow 0.25s;
+}
+.quizButton:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  box-shadow: 5px 5px 5px black;
+}
 
 @media (max-width: 1000px) {
   #landingPageContainer {

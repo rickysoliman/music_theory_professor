@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import NavigationButton from '../NavigationButton';
 import Modal from '../Modal';
+import LoginButton from '../../loggedOut/LoginButton';
 
 class QuizMenu extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             quiz: null
@@ -26,17 +27,26 @@ class QuizMenu extends Component {
     }
 
     render() {
-        const quizTypes = ['Note Names', 'Chords', 'Intervals'];
-        const quizButtons = quizTypes.map(quiz => {
-            return <NavigationButton key={quiz} onClick={this.handleSelection} type={quiz}/>;
-        });
-        return (
-            <div id="quizMenu">
-                <h1 style={{ color: 'white', margin: '20px' }}>What would you like to be quizzed on today?</h1>
-                <div className="menuButtons">{quizButtons}</div>
-                <Modal close={this.closeModal} quizType={this.state.quiz}/>
-            </div>
-        )
+        if (this.props.authenticated) {
+            const quizTypes = ['Note Names', 'Chords', 'Intervals'];
+            const quizButtons = quizTypes.map(quiz => {
+                return <NavigationButton key={quiz} onClick={this.handleSelection} type={quiz}/>;
+            });
+            return (
+                <div id="quizMenu">
+                    <h1 style={{ color: 'white', margin: '20px' }}>What would you like to be quizzed on today?</h1>
+                    <div className="menuButtons">{quizButtons}</div>
+                    <Modal close={this.closeModal} quizType={this.state.quiz}/>
+                </div>
+            )
+        } else {
+            return (
+                <div className="mustLogIn">
+                    <h2>Please log in to view our quizzes.</h2>
+                    <LoginButton message='Log In'/>
+                </div>
+            )
+        }
     }
 };
 

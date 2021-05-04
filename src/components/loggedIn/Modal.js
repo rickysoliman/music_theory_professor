@@ -73,18 +73,17 @@ const Modal = props => {
     };
 
     return showModal ? (
-
         <Background ref={modalRef}>
             <animated.div style={animation}>
                 <ModalWrapper showModal={showModal}>
                     <ModalContent>
-                        <Quiz quizType={props.quizType}/>
+                        <Quiz close={areYouSure} quizType={props.quizType}/>
                     </ModalContent>
                     <CloseModalButton aria-label="Close modal" onClick={areYouSure}>X</CloseModalButton>
+                    {/* <CloseModalButton aria-label="Close modal" onClick={hideModal}>X</CloseModalButton> */}
                 </ModalWrapper>
             </animated.div>
         </Background>
-
     ) : null;
 };
 

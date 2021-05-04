@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from '../loggedOut/LoginButton.js'
 
 const Profile = () => {
     const { isAuthenticated, user } = useAuth0();
@@ -13,7 +14,10 @@ const Profile = () => {
             </div>
         </div>
     ) : (
-        <div>Please log in</div>
+        <div className="mustLogIn">
+            <h2>Please log in to view your profile.</h2>
+            <LoginButton message='Log In'/>
+        </div>
     )
 };
 
