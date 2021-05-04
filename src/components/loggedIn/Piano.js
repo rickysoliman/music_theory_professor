@@ -6,6 +6,8 @@ const Board = styled.div`
     display: flex;
     box-shadow: 5px 10px;
     border-radius: 5px;
+    width: 50%;
+    height: 10%;
 `;
 
 const Button = styled.button`
@@ -33,18 +35,30 @@ class Piano extends Component {
         super(props);
 
         this.state = {
-            'C': false,
-            'Db': false,
-            'D': false,
-            'Eb': false,
-            'E': false,
-            'F': false,
-            'Gb': false,
-            'G': false,
-            'Ab': false,
-            'A': false,
-            'Bb': false,
-            'B': false
+            'C1': false,
+            'Db1': false,
+            'D1': false,
+            'Eb1': false,
+            'E1': false,
+            'F1': false,
+            'Gb1': false,
+            'G1': false,
+            'Ab1': false,
+            'A1': false,
+            'Bb1': false,
+            'B1': false,
+            'C2': false,
+            'Db2': false,
+            'D2': false,
+            'Eb2': false,
+            'E2': false,
+            'F2': false,
+            'Gb2': false,
+            'G2': false,
+            'Ab2': false,
+            'A2': false,
+            'Bb2': false,
+            'B2': false
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -54,7 +68,8 @@ class Piano extends Component {
     }
 
     handleClick = e => {
-        let note = e.target.id;
+        let id = e.target.id, note;
+        note = id.includes('b') ? id.slice(0,2) : id[0];
         let selectionLimit = this.props.selectionLimit;
         let areAnySelected = this.areAnySelected();
 
@@ -70,11 +85,11 @@ class Piano extends Component {
                 this.resetBoard(() => this.props.deselect(note));
             };
         };
-        this.setState({ [note]: true });
+        this.setState({ [id]: true });
 
         this.props.onClick(note);
-        let audio = document.getElementById(`${note}note`);
-        audio.play();
+        // let audio = document.getElementById(`${note}note`);
+        // audio.play();
     };
 
     areAnySelected = () => {
@@ -89,18 +104,30 @@ class Piano extends Component {
 
     resetBoard = cb => {
         this.setState({
-            'C': false,
-            'Db': false,
-            'D': false,
-            'Eb': false,
-            'E': false,
-            'F': false,
-            'Gb': false,
-            'G': false,
-            'Ab': false,
-            'A': false,
-            'Bb': false,
-            'B': false
+            'C1': false,
+            'Db1': false,
+            'D1': false,
+            'Eb1': false,
+            'E1': false,
+            'F1': false,
+            'Gb1': false,
+            'G1': false,
+            'Ab1': false,
+            'A1': false,
+            'Bb1': false,
+            'B1': false,
+            'C2': false,
+            'Db2': false,
+            'D2': false,
+            'Eb2': false,
+            'E2': false,
+            'F2': false,
+            'Gb2': false,
+            'G2': false,
+            'Ab2': false,
+            'A2': false,
+            'Bb2': false,
+            'B2': false
         }, cb);
     }
 
@@ -113,18 +140,30 @@ class Piano extends Component {
         return (
             <>
                 <Board>
-                    <Key color={'white'} selected={this.state['C']} onClick={this.handleClick} id="C" className="key white"/>
-                    <Key color={'black'} selected={this.state['Db']} onClick={this.handleClick} id="Db" className="key black"/>
-                    <Key color={'white'} selected={this.state['D']} onClick={this.handleClick} id="D" className="key white"/>
-                    <Key color={'black'} selected={this.state['Eb']} onClick={this.handleClick} id="Eb" className="key black"/>
-                    <Key color={'white'} selected={this.state['E']} onClick={this.handleClick} id="E" className="key white"/>
-                    <Key color={'white'} selected={this.state['F']} onClick={this.handleClick} id="F" className="key white"/>
-                    <Key color={'black'} selected={this.state['Gb']} onClick={this.handleClick} id="Gb" className="key black"/>
-                    <Key color={'white'} selected={this.state['G']} onClick={this.handleClick} id="G" className="key white"/>
-                    <Key color={'black'} selected={this.state['Ab']} onClick={this.handleClick} id="Ab" className="key black"/>
-                    <Key color={'white'} selected={this.state['A']} onClick={this.handleClick} id="A" className="key white"/>
-                    <Key color={'black'} selected={this.state['Bb']} onClick={this.handleClick} id="Bb" className="key black"/>
-                    <Key color={'white'} selected={this.state['B']} onClick={this.handleClick} id="B" className="key white"/>
+                    <Key position={'start'} color={'white'} selected={this.state['C1']} onClick={this.handleClick} id="C1" className="key white"/>
+                    <Key position={null} color={'black'} selected={this.state['Db1']} onClick={this.handleClick} id="Db1" className="key black"/>
+                    <Key position={null} color={'white'} selected={this.state['D1']} onClick={this.handleClick} id="D1" className="key white"/>
+                    <Key position={null} color={'black'} selected={this.state['Eb1']} onClick={this.handleClick} id="Eb1" className="key black"/>
+                    <Key position={null} color={'white'} selected={this.state['E1']} onClick={this.handleClick} id="E1" className="key white"/>
+                    <Key position={null} color={'white'} selected={this.state['F1']} onClick={this.handleClick} id="F1" className="key white"/>
+                    <Key position={null} color={'black'} selected={this.state['Gb1']} onClick={this.handleClick} id="Gb1" className="key black"/>
+                    <Key position={null} color={'white'} selected={this.state['G1']} onClick={this.handleClick} id="G1" className="key white"/>
+                    <Key position={null} color={'black'} selected={this.state['Ab1']} onClick={this.handleClick} id="Ab1" className="key black"/>
+                    <Key position={null} color={'white'} selected={this.state['A1']} onClick={this.handleClick} id="A1" className="key white"/>
+                    <Key position={null} color={'black'} selected={this.state['Bb1']} onClick={this.handleClick} id="Bb1" className="key black"/>
+                    <Key position={null} color={'white'} selected={this.state['B1']} onClick={this.handleClick} id="B1" className="key white"/>
+                    <Key position={null} color={'white'} selected={this.state['C2']} onClick={this.handleClick} id="C2" className="key white" />
+                    <Key position={null} color={'black'} selected={this.state['Db2']} onClick={this.handleClick} id="Db2" className="key black" />
+                    <Key position={null} color={'white'} selected={this.state['D2']} onClick={this.handleClick} id="D2" className="key white" />
+                    <Key position={null} color={'black'} selected={this.state['Eb2']} onClick={this.handleClick} id="Eb2" className="key black" />
+                    <Key position={null} color={'white'} selected={this.state['E2']} onClick={this.handleClick} id="E2" className="key white" />
+                    <Key position={null} color={'white'} selected={this.state['F2']} onClick={this.handleClick} id="F2" className="key white" />
+                    <Key position={null} color={'black'} selected={this.state['Gb2']} onClick={this.handleClick} id="Gb2" className="key black" />
+                    <Key position={null} color={'white'} selected={this.state['G2']} onClick={this.handleClick} id="G2" className="key white" />
+                    <Key position={null} color={'black'} selected={this.state['Ab2']} onClick={this.handleClick} id="Ab2" className="key black" />
+                    <Key position={null} color={'white'} selected={this.state['A2']} onClick={this.handleClick} id="A2" className="key white" />
+                    <Key position={null} color={'black'} selected={this.state['Bb2']} onClick={this.handleClick} id="Bb2" className="key black" />
+                    <Key position={'end'} color={'white'} selected={this.state['B2']} onClick={this.handleClick} id="B2" className="key white" />
 
                     <audio id="Cnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/C.mp3"></audio>
                     <audio id="Dbnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/Db.mp3"></audio>

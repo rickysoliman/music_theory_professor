@@ -3,12 +3,15 @@ import styled from 'styled-components';
 
 const WhiteKey = styled.div`
     width: 100px;
-    height: 400px;
+    // height: 400px;
+    // width: 75px;
+    height: 280px;
     background-color: ${props => props.selected ? '#563a07' : '#f1e4cf'};
     border: 2px solid black;
     border-radius: ${props => {
-        if (props.id === 'C') return '5px 0px 0px 5px';
-        else if (props.id === 'B') return '0px 5px 5px 0px';
+        if (props.position === 'start') return '5px 0px 0px 5px';
+        else if (props.position === 'end') return '0px 5px 5px 0px';
+        else if (props.position === null) return 'none';
     }};
     &:hover {
         cursor: pointer;
@@ -18,10 +21,12 @@ const WhiteKey = styled.div`
 
 const BlackKey = styled.div`
     width: 60px;
-    height: 240px;
+    // height: 240px;
+    // width: 45px;
+    height: 170px;
     background-color: ${props => props.selected ? '#563a07' : '#191414'};
-    margin-left: -30px;
-    margin-right: -30px;
+    margin-left: -20px;
+    margin-right: -20px;
     z-index: 2;
     border: 3px solid black;
     border-radius: 0px 0px 7px 7px;
@@ -62,8 +67,8 @@ class Key extends React.Component {
 
     render() {
         return (this.props.color === 'white') ?
-            <WhiteKey selected={this.state.selected} onClick={this.props.onClick} id={this.props.id} className={`key ${this.props.color}`}></WhiteKey> :
-            <BlackKey selected={this.state.selected} onClick={this.props.onClick} id={this.props.id} className={`key ${this.props.color}`}></BlackKey>;
+            <WhiteKey position={this.props.position} selected={this.state.selected} onClick={this.props.onClick} id={this.props.id} className={`key ${this.props.color}`}/> :
+            <BlackKey position={this.props.position} selected={this.state.selected} onClick={this.props.onClick} id={this.props.id} className={`key ${this.props.color}`}/>;
 
     }
 }
