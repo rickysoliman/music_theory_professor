@@ -10,7 +10,56 @@ class Quiz extends Component {
                 'Note Names': [
                     'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'
                 ],
-                'Chords': [],
+                'Chords': [
+                    {
+                        question: 'C',
+                        answer: ['C', 'E', 'G']
+                    },
+                    {
+                        question: 'Db',
+                        answer: ['Db', 'F', 'Ab']
+                    },
+                    {
+                        question: 'D',
+                        answer: ['D', 'Gb', 'A']
+                    },
+                    {
+                        question: 'Eb',
+                        answer: ['Eb', 'G', 'Bb']
+                    },
+                    {
+                        question: 'E',
+                        answer: ['E', 'Ab', 'B']
+                    },
+                    {
+                        question: 'F',
+                        answer: ['F', 'A', 'C']
+                    },
+                    {
+                        question: 'Gb',
+                        answer: ['Gb', 'Bb', 'Db']
+                    },
+                    {
+                        question: 'G',
+                        answer: ['G', 'B', 'D']
+                    },
+                    {
+                        question: 'Ab',
+                        answer: ['Ab', 'C', 'Eb']
+                    },
+                    {
+                        question: 'A',
+                        answer: ['A', 'Db', 'E']
+                    },
+                    {
+                        question: 'Bb',
+                        answer: ['Bb', 'D', 'F']
+                    },
+                    {
+                        question: 'B',
+                        answer: ['B', 'Eb', 'Gb']
+                    }
+                ],
                 'Intervals': []
             },
             noteLimit: {
@@ -31,6 +80,7 @@ class Quiz extends Component {
         this.begin = this.begin.bind(this);
         this.end = this.end.bind(this);
         this.calculateScore = this.calculateScore.bind(this);
+        this.compareArrays = this.compareArrays.bind(this);
         this.calculateGrade = this.calculateGrade.bind(this);
         this.returnToHome = this.returnToHome.bind(this);
         this.mostRecentlySelected = this.mostRecentlySelected.bind(this);
@@ -38,12 +88,23 @@ class Quiz extends Component {
 
     calculateScore = () => {
         let questions = this.state.questions[this.props.quizType],
-            answers = this.state.answers;
+            answers = this.state.answers,
+            quizType = this.props.quizType;
         
+
         let score = 0;
-        for (let i = 0; i < questions.length; i++) {
-            if (questions[i] === answers[i]) score++;
-        }
+        if (quizType === 'Chords') {
+            for (let i = 0; i < questions.length; i++) {
+                let expectedAnswer = questions[i].answer,
+                    studentAnswer = this.state.answers[i];
+                if (this.compareArrays(expectedAnswer, studentAnswer)) score++;
+            };
+        } else {
+            for (let i = 0; i < questions.length; i++) {
+                if (questions[i] === answers[i]) score++;
+            };
+        };
+
         let percentage = Math.round(score / questions.length * 100);
         let results = {
             percentage,
@@ -53,6 +114,14 @@ class Quiz extends Component {
         };
         return results;
     }
+
+    compareArrays = (x, y) => {
+        if (x.length !== y.length) return false;
+        for (let i = 0; i < x.length; i++) {
+            if (!y.includes(x[i]) || !x.includes(y[i])) return false;
+        };
+        return true;
+    };
 
     calculateGrade = score => {
         if (score >= 97 && score <= 100) return 'A+';
@@ -198,13 +267,13 @@ class Quiz extends Component {
         } else {
             const subMessages = {
                 'Note Names': 'Select the following note on the keyboard:',
-                'Chords': 'Spell out the following chord on the keyboard:',
+                'Chords': 'Spell out the following MAJOR chord on the keyboard:',
                 'Intervals': 'Select the note on the keyboard that is the following interval above C:'
             };
             return (
                 <div className='quiz'>
                     <p className="subMessage">{`${index + 1}.`} {subMessages[this.props.quizType]}</p>
-                    <div className='question'>{questions[index]}</div>
+                    <div className='question'>{quizType === 'Chords' ? questions[index].question : questions[index]}</div>
                     <Piano mostRecentlySelected={this.mostRecentlySelected} selectionLimit={this.state.noteLimit[this.props.quizType]} deselect={this.deselect} submitAnswer={this.submitAnswer} onClick={this.handleClick}/>
                 </div>
             )
