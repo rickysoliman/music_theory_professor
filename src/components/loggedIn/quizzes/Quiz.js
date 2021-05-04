@@ -60,7 +60,52 @@ class Quiz extends Component {
                         answer: ['B', 'Eb', 'Gb']
                     }
                 ],
-                'Intervals': []
+                'Intervals': [
+                    {
+                        question: 'half step',
+                        answer: 'Db'
+                    },
+                    {
+                        question: 'full step',
+                        answer: 'D'
+                    },
+                    {
+                        question: 'minor third',
+                        answer: 'Eb'
+                    },
+                    {
+                        question: 'major third',
+                        answer: 'E'
+                    },
+                    {
+                        question: 'perfect fourth',
+                        answer: 'F'
+                    },
+                    {
+                        question: 'tritone',
+                        answer: 'Gb'
+                    },
+                    {
+                        question: 'perfect fifth',
+                        answer: 'G'
+                    },
+                    {
+                        question: 'minor sixth',
+                        answer: 'Ab'
+                    },
+                    {
+                        question: 'major sixth',
+                        answer: 'A'
+                    },
+                    {
+                        question: 'minor seventh',
+                        answer: 'Bb'
+                    },
+                    {
+                        question: 'major seventh',
+                        answer: 'B'
+                    }
+                ]
             },
             noteLimit: {
                 'Note Names': 1,
@@ -90,7 +135,6 @@ class Quiz extends Component {
         let questions = this.state.questions[this.props.quizType],
             answers = this.state.answers,
             quizType = this.props.quizType;
-        
 
         let score = 0;
         if (quizType === 'Chords') {
@@ -99,9 +143,15 @@ class Quiz extends Component {
                     studentAnswer = this.state.answers[i];
                 if (this.compareArrays(expectedAnswer, studentAnswer)) score++;
             };
-        } else {
+        } else if (quizType === 'Note Names') {
             for (let i = 0; i < questions.length; i++) {
                 if (questions[i] === answers[i]) score++;
+            };
+        } else if (quizType === 'Intervals') {
+            for (let i = 0; i < questions.length; i++) {
+                let expectedAnswer = questions[i].answer,
+                    studentAnswer = this.state.answers[i];
+                if (expectedAnswer === studentAnswer) score++;
             };
         };
 
@@ -273,7 +323,7 @@ class Quiz extends Component {
             return (
                 <div className='quiz'>
                     <p className="subMessage">{`${index + 1}.`} {subMessages[this.props.quizType]}</p>
-                    <div className='question'>{quizType === 'Chords' ? questions[index].question : questions[index]}</div>
+                    <div className='question'>{quizType === 'Chords' || quizType === 'Intervals' ? questions[index].question : questions[index]}</div>
                     <Piano mostRecentlySelected={this.mostRecentlySelected} selectionLimit={this.state.noteLimit[this.props.quizType]} deselect={this.deselect} submitAnswer={this.submitAnswer} onClick={this.handleClick}/>
                 </div>
             )
