@@ -36,28 +36,28 @@ class Piano extends Component {
 
         this.state = {
             'C1': false,
-            'Db1': false,
+            'D♭1': false,
             'D1': false,
-            'Eb1': false,
+            'E♭1': false,
             'E1': false,
             'F1': false,
-            'Gb1': false,
+            'G♭1': false,
             'G1': false,
-            'Ab1': false,
+            'A♭1': false,
             'A1': false,
-            'Bb1': false,
+            'B♭1': false,
             'B1': false,
             'C2': false,
-            'Db2': false,
+            'D♭2': false,
             'D2': false,
-            'Eb2': false,
+            'E♭2': false,
             'E2': false,
             'F2': false,
-            'Gb2': false,
+            'G♭2': false,
             'G2': false,
-            'Ab2': false,
+            'A♭2': false,
             'A2': false,
-            'Bb2': false,
+            'B♭2': false,
             'B2': false
         }
 
@@ -68,8 +68,9 @@ class Piano extends Component {
     }
 
     handleClick = e => {
-        let id = e.target.id, note;
-        note = id.includes('b') ? id.slice(0,2) : id[0];
+        let id = e.target.id, note, octave;
+        note = id.includes('♭') ? id.slice(0,2) : id[0];
+        octave = id[id.length - 1];
         let selectionLimit = this.props.selectionLimit;
         let areAnySelected = this.areAnySelected();
 
@@ -88,8 +89,9 @@ class Piano extends Component {
         this.setState({ [id]: true });
 
         this.props.onClick(note);
-        // let audio = document.getElementById(`${note}note`);
-        // audio.play();
+        let audioId = `${note}${octave}note`;
+        let audio = document.getElementById(audioId);
+        audio.play();
     };
 
     areAnySelected = () => {
@@ -105,28 +107,28 @@ class Piano extends Component {
     resetBoard = cb => {
         this.setState({
             'C1': false,
-            'Db1': false,
+            'D♭1': false,
             'D1': false,
-            'Eb1': false,
+            'E♭1': false,
             'E1': false,
             'F1': false,
-            'Gb1': false,
+            'G♭1': false,
             'G1': false,
-            'Ab1': false,
+            'A♭1': false,
             'A1': false,
-            'Bb1': false,
+            'B♭1': false,
             'B1': false,
             'C2': false,
-            'Db2': false,
+            'D♭2': false,
             'D2': false,
-            'Eb2': false,
+            'E♭2': false,
             'E2': false,
             'F2': false,
-            'Gb2': false,
+            'G♭2': false,
             'G2': false,
-            'Ab2': false,
+            'A♭2': false,
             'A2': false,
-            'Bb2': false,
+            'B♭2': false,
             'B2': false
         }, cb);
     }
@@ -141,42 +143,54 @@ class Piano extends Component {
             <>
                 <Board>
                     <Key position={'start'} color={'white'} selected={this.state['C1']} onClick={this.handleClick} id="C1" className="key white"/>
-                    <Key position={null} color={'black'} selected={this.state['Db1']} onClick={this.handleClick} id="Db1" className="key black"/>
+                    <Key position={null} color={'black'} selected={this.state['D♭1']} onClick={this.handleClick} id="D♭1" className="key black"/>
                     <Key position={null} color={'white'} selected={this.state['D1']} onClick={this.handleClick} id="D1" className="key white"/>
-                    <Key position={null} color={'black'} selected={this.state['Eb1']} onClick={this.handleClick} id="Eb1" className="key black"/>
+                    <Key position={null} color={'black'} selected={this.state['E♭1']} onClick={this.handleClick} id="E♭1" className="key black"/>
                     <Key position={null} color={'white'} selected={this.state['E1']} onClick={this.handleClick} id="E1" className="key white"/>
                     <Key position={null} color={'white'} selected={this.state['F1']} onClick={this.handleClick} id="F1" className="key white"/>
-                    <Key position={null} color={'black'} selected={this.state['Gb1']} onClick={this.handleClick} id="Gb1" className="key black"/>
+                    <Key position={null} color={'black'} selected={this.state['G♭1']} onClick={this.handleClick} id="G♭1" className="key black"/>
                     <Key position={null} color={'white'} selected={this.state['G1']} onClick={this.handleClick} id="G1" className="key white"/>
-                    <Key position={null} color={'black'} selected={this.state['Ab1']} onClick={this.handleClick} id="Ab1" className="key black"/>
+                    <Key position={null} color={'black'} selected={this.state['A♭1']} onClick={this.handleClick} id="A♭1" className="key black"/>
                     <Key position={null} color={'white'} selected={this.state['A1']} onClick={this.handleClick} id="A1" className="key white"/>
-                    <Key position={null} color={'black'} selected={this.state['Bb1']} onClick={this.handleClick} id="Bb1" className="key black"/>
+                    <Key position={null} color={'black'} selected={this.state['B♭1']} onClick={this.handleClick} id="B♭1" className="key black"/>
                     <Key position={null} color={'white'} selected={this.state['B1']} onClick={this.handleClick} id="B1" className="key white"/>
                     <Key position={null} color={'white'} selected={this.state['C2']} onClick={this.handleClick} id="C2" className="key white" />
-                    <Key position={null} color={'black'} selected={this.state['Db2']} onClick={this.handleClick} id="Db2" className="key black" />
+                    <Key position={null} color={'black'} selected={this.state['D♭2']} onClick={this.handleClick} id="D♭2" className="key black" />
                     <Key position={null} color={'white'} selected={this.state['D2']} onClick={this.handleClick} id="D2" className="key white" />
-                    <Key position={null} color={'black'} selected={this.state['Eb2']} onClick={this.handleClick} id="Eb2" className="key black" />
+                    <Key position={null} color={'black'} selected={this.state['E♭2']} onClick={this.handleClick} id="E♭2" className="key black" />
                     <Key position={null} color={'white'} selected={this.state['E2']} onClick={this.handleClick} id="E2" className="key white" />
                     <Key position={null} color={'white'} selected={this.state['F2']} onClick={this.handleClick} id="F2" className="key white" />
-                    <Key position={null} color={'black'} selected={this.state['Gb2']} onClick={this.handleClick} id="Gb2" className="key black" />
+                    <Key position={null} color={'black'} selected={this.state['G♭2']} onClick={this.handleClick} id="G♭2" className="key black" />
                     <Key position={null} color={'white'} selected={this.state['G2']} onClick={this.handleClick} id="G2" className="key white" />
-                    <Key position={null} color={'black'} selected={this.state['Ab2']} onClick={this.handleClick} id="Ab2" className="key black" />
+                    <Key position={null} color={'black'} selected={this.state['A♭2']} onClick={this.handleClick} id="A♭2" className="key black" />
                     <Key position={null} color={'white'} selected={this.state['A2']} onClick={this.handleClick} id="A2" className="key white" />
-                    <Key position={null} color={'black'} selected={this.state['Bb2']} onClick={this.handleClick} id="Bb2" className="key black" />
+                    <Key position={null} color={'black'} selected={this.state['B♭2']} onClick={this.handleClick} id="B♭2" className="key black" />
                     <Key position={'end'} color={'white'} selected={this.state['B2']} onClick={this.handleClick} id="B2" className="key white" />
 
-                    <audio id="Cnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/C.mp3"></audio>
-                    <audio id="Dbnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/Db.mp3"></audio>
-                    <audio id="Dnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/D.mp3"></audio>
-                    <audio id="Ebnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/Eb.mp3"></audio>
-                    <audio id="Enote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/E.mp3"></audio>
-                    <audio id="Fnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/F.mp3"></audio>
-                    <audio id="Gbnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/Gb.mp3"></audio>
-                    <audio id="Gnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/G.mp3"></audio>
-                    <audio id="Abnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/Ab.mp3"></audio>
-                    <audio id="Anote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/A.mp3"></audio>
-                    <audio id="Bbnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/Bb.mp3"></audio>
-                    <audio id="Bnote" src="https://rickyspianonotes.s3-us-west-1.amazonaws.com/B.mp3"></audio>
+                    <audio id="C1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/C1.mp3"></audio>
+                    <audio id="D♭1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Db1.mp3"></audio>
+                    <audio id="D1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/D1.mp3"></audio>
+                    <audio id="E♭1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Eb1.mp3"></audio>
+                    <audio id="E1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/E1.mp3"></audio>
+                    <audio id="F1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/F1.mp3"></audio>
+                    <audio id="G♭1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Gb1.mp3"></audio>
+                    <audio id="G1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/G1.mp3"></audio>
+                    <audio id="A♭1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Ab1.mp3"></audio>
+                    <audio id="A1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/A1.mp3"></audio>
+                    <audio id="B♭1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Bb1.mp3"></audio>
+                    <audio id="B1note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/B1.mp3"></audio>
+                    <audio id="C2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/C2.mp3"></audio>
+                    <audio id="D♭2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Db2.mp3"></audio>
+                    <audio id="D2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/D2.mp3"></audio>
+                    <audio id="E♭2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Eb2.mp3"></audio>
+                    <audio id="E2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/E2.mp3"></audio>
+                    <audio id="F2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/F2.mp3"></audio>
+                    <audio id="G♭2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Gb2.mp3"></audio>
+                    <audio id="G2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/G2.mp3"></audio>
+                    <audio id="A♭2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Ab2.mp3"></audio>
+                    <audio id="A2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/A2.mp3"></audio>
+                    <audio id="B♭2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/Bb2.mp3"></audio>
+                    <audio id="B2note" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/pianoNotes/B2.mp3"></audio>
                 </Board>
                 <Button clickable={this.areAnySelected().length === this.props.selectionLimit} onClick={this.handleSubmit}>Submit</Button>
             </>

@@ -8,114 +8,38 @@ class Quiz extends Component {
         this.state = {
             questions: {
                 'Note Names': [
-                    'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'
+                    'C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B'
                 ],
                 'Chords': [
-                    {
-                        question: 'C',
-                        answer: ['C', 'E', 'G']
-                    },
-                    {
-                        question: 'Db',
-                        answer: ['Db', 'F', 'Ab']
-                    },
-                    {
-                        question: 'D',
-                        answer: ['D', 'Gb', 'A']
-                    },
-                    {
-                        question: 'Eb',
-                        answer: ['Eb', 'G', 'Bb']
-                    },
-                    {
-                        question: 'E',
-                        answer: ['E', 'Ab', 'B']
-                    },
-                    {
-                        question: 'F',
-                        answer: ['F', 'A', 'C']
-                    },
-                    {
-                        question: 'Gb',
-                        answer: ['Gb', 'Bb', 'Db']
-                    },
-                    {
-                        question: 'G',
-                        answer: ['G', 'B', 'D']
-                    },
-                    {
-                        question: 'Ab',
-                        answer: ['Ab', 'C', 'Eb']
-                    },
-                    {
-                        question: 'A',
-                        answer: ['A', 'Db', 'E']
-                    },
-                    {
-                        question: 'Bb',
-                        answer: ['Bb', 'D', 'F']
-                    },
-                    {
-                        question: 'B',
-                        answer: ['B', 'Eb', 'Gb']
-                    }
+                    { question: 'C', answer: ['C', 'E', 'G'] },
+                    { question: 'D♭', answer: ['D♭', 'F', 'A♭'] },
+                    { question: 'D', answer: ['D', 'G♭', 'A'] },
+                    { question: 'E♭', answer: ['E♭', 'G', 'B♭'] },
+                    { question: 'E', answer: ['E', 'A♭', 'B'] },
+                    { question: 'F', answer: ['F', 'A', 'C'] },
+                    { question: 'G♭', answer: ['G♭', 'B♭', 'D♭'] },
+                    { question: 'G', answer: ['G', 'B', 'D'] },
+                    { question: 'A♭', answer: ['A♭', 'C', 'E♭'] },
+                    { question: 'A', answer: ['A', 'D♭', 'E'] },
+                    { question: 'B♭', answer: ['B♭', 'D', 'F'] },
+                    { question: 'B', answer: ['B', 'E♭', 'G♭'] }
                 ],
                 'Intervals': [
-                    {
-                        question: 'half step',
-                        answer: 'Db'
-                    },
-                    {
-                        question: 'full step',
-                        answer: 'D'
-                    },
-                    {
-                        question: 'minor third',
-                        answer: 'Eb'
-                    },
-                    {
-                        question: 'major third',
-                        answer: 'E'
-                    },
-                    {
-                        question: 'perfect fourth',
-                        answer: 'F'
-                    },
-                    {
-                        question: 'tritone',
-                        answer: 'Gb'
-                    },
-                    {
-                        question: 'perfect fifth',
-                        answer: 'G'
-                    },
-                    {
-                        question: 'minor sixth',
-                        answer: 'Ab'
-                    },
-                    {
-                        question: 'major sixth',
-                        answer: 'A'
-                    },
-                    {
-                        question: 'minor seventh',
-                        answer: 'Bb'
-                    },
-                    {
-                        question: 'major seventh',
-                        answer: 'B'
-                    },
-                    {
-                        question: 'octave',
-                        answer: 'C'
-                    }
+                    { question: 'half step', answer: 'D♭' },
+                    { question: 'full step', answer: 'D' },
+                    { question: 'minor third',answer: 'E♭' },
+                    { question: 'major third',answer: 'E' },
+                    { question: 'perfect fourth',answer: 'F' },
+                    { question: 'tritone',answer: 'G♭' },
+                    { question: 'perfect fifth',answer: 'G' },
+                    { question: 'minor sixth',answer: 'A♭' },
+                    { question: 'major sixth',answer: 'A' },
+                    { question: 'minor seventh',answer: 'B♭' },
+                    { question: 'major seventh',answer: 'B' },
+                    { question: 'octave',answer: 'C' }
                 ]
             },
-            noteLimit: {
-                'Note Names': 1,
-                'Chords': 3,
-                'Intervals': 1
-            },
+            noteLimit: { 'Note Names': 1, 'Chords': 3, 'Intervals': 1 },
             answers: [],
             pendingAnswer: this.props.quizType === 'Chords' ? [] : null,
             index: 0,
@@ -159,13 +83,13 @@ class Quiz extends Component {
             };
         };
 
-        let percentage = Math.round(score / questions.length * 100);
-        let results = {
-            percentage,
-            right: score,
-            totalQuestions: questions.length,
-            grade: this.calculateGrade(percentage)
-        };
+        let percentage = Math.round(score / questions.length * 100),
+            results = {
+                percentage,
+                right: score,
+                totalQuestions: questions.length,
+                grade: this.calculateGrade(percentage)
+            };
         return results;
     }
 
