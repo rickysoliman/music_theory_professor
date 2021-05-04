@@ -71,6 +71,11 @@ class Piano extends Component {
         let id = e.target.id, note, octave;
         note = id.includes('♭') ? id.slice(0,2) : id[0];
         octave = id[id.length - 1];
+
+        let audioId = `${note}${octave}note`;
+        let audio = document.getElementById(audioId);
+        audio.play();
+
         let selectionLimit = this.props.selectionLimit;
         let areAnySelected = this.areAnySelected();
 
@@ -89,9 +94,6 @@ class Piano extends Component {
         this.setState({ [id]: true });
 
         this.props.onClick(note);
-        let audioId = `${note}${octave}note`;
-        let audio = document.getElementById(audioId);
-        audio.play();
     };
 
     areAnySelected = () => {
