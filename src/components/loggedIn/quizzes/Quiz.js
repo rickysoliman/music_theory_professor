@@ -104,6 +104,10 @@ class Quiz extends Component {
                     {
                         question: 'major seventh',
                         answer: 'B'
+                    },
+                    {
+                        question: 'octave',
+                        answer: 'C'
                     }
                 ]
             },
@@ -280,7 +284,7 @@ class Quiz extends Component {
         const intros = {
             'Note Names': 'Welcome to the note names quiz! For each note you are given, please select its corresponding key on the keyboard. There will be 12 questions total. Good luck!',
             'Chords': 'Welcome to the chords quiz! For each note you are given, please spell out that note\'s MAJOR chord. There will be 12 questions total, and you will only be allowed to select 3 notes. Good luck!',
-            'Intervals': 'Welcome to the intervals quiz! For each interval you are given, please select the note that is that interval ABOVE THE NOTE C. There will be 11 questions total. Good luck!'
+            'Intervals': 'Welcome to the intervals quiz! For each interval you are given, please select the note that is that interval ABOVE THE NOTE C. There will be 12 questions total. Good luck!'
         };
 
         // quiz is not in progress
