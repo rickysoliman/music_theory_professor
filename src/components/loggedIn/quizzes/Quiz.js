@@ -107,15 +107,11 @@ class Quiz extends Component {
         let pendingAnswer;
         if (this.props.quizType === 'Chords') {
             pendingAnswer = this.state.pendingAnswer;
-            if (pendingAnswer.includes(note)) {
-                pendingAnswer.splice(pendingAnswer.indexOf(note), 1);
+            if (pendingAnswer.length === 3) {
+                pendingAnswer = [note];
             } else {
-                if (pendingAnswer.length === 3) {
-                    pendingAnswer = [note];
-                } else {
-                    pendingAnswer.push(note);
-                }
-            };
+                pendingAnswer.push(note);
+            }
         } else {
             pendingAnswer = note;
         }
