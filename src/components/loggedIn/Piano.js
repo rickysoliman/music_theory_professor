@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import DefaultState from './DefaultPianoState';
 import Key from './Key';
 
 const Board = styled.div`
@@ -34,32 +35,7 @@ class Piano extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            'C1': false,
-            'D♭1': false,
-            'D1': false,
-            'E♭1': false,
-            'E1': false,
-            'F1': false,
-            'G♭1': false,
-            'G1': false,
-            'A♭1': false,
-            'A1': false,
-            'B♭1': false,
-            'B1': false,
-            'C2': false,
-            'D♭2': false,
-            'D2': false,
-            'E♭2': false,
-            'E2': false,
-            'F2': false,
-            'G♭2': false,
-            'G2': false,
-            'A♭2': false,
-            'A2': false,
-            'B♭2': false,
-            'B2': false
-        }
+        this.state = DefaultState
 
         this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -109,32 +85,7 @@ class Piano extends Component {
     };
 
     resetBoard = cb => {
-        this.setState({
-            'C1': false,
-            'D♭1': false,
-            'D1': false,
-            'E♭1': false,
-            'E1': false,
-            'F1': false,
-            'G♭1': false,
-            'G1': false,
-            'A♭1': false,
-            'A1': false,
-            'B♭1': false,
-            'B1': false,
-            'C2': false,
-            'D♭2': false,
-            'D2': false,
-            'E♭2': false,
-            'E2': false,
-            'F2': false,
-            'G♭2': false,
-            'G2': false,
-            'A♭2': false,
-            'A2': false,
-            'B♭2': false,
-            'B2': false
-        }, cb);
+        this.setState(DefaultState, cb);
     }
 
     handleSubmit() {
