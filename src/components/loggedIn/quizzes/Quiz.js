@@ -182,6 +182,7 @@ class Quiz extends Component {
             if (this.state.index === 0) {
                 return (       
                     <div className='quiz'>
+                        <img alt="owl" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/loneowllogo.png" style={{ width: '125px', height: '125px' }}></img>
                         <h2 className='quizIntro'>{intros[quizType]}</h2>
                         <button className='quizButton' onClick={this.begin}>Begin Quiz</button>
                     </div>
@@ -198,6 +199,7 @@ class Quiz extends Component {
                 };
                 return (
                     <div className='results'>
+                        <img alt="owl" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/loneowllogo.png" style={{ width: '125px', height: '125px' }}></img>
                         <div>{outros[results.grade[0]]}</div><br/>
                         <p>You answered <b>{results.right}</b> out of <b>{results.totalQuestions}</b> questions correctly.</p><br/>
                         <p>Your score is <b>{results.percentage}%</b>.</p>
@@ -215,6 +217,7 @@ class Quiz extends Component {
             };
             return (
                 <div className='quiz'>
+                    <img alt="owl" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/loneowllogo.png" style={{ width: '125px', height: '125px' }}></img>
                     <p className="subMessage">{`${index + 1}.`} {subMessages[this.props.quizType]}</p>
                     <div className='question'>{quizType === 'Chords' || quizType === 'Intervals' ? questions[index].question : questions[index]}</div>
                     <Piano mostRecentlySelected={this.mostRecentlySelected} selectionLimit={this.state.noteLimit[this.props.quizType]} deselect={this.deselect} submitAnswer={this.submitAnswer} onClick={this.handleClick}/>

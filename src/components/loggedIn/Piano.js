@@ -9,6 +9,7 @@ const Board = styled.div`
     border-radius: 5px;
     width: 50%;
     height: 10%;
+    z-index: 9;
 `;
 
 const Button = styled.button`
@@ -22,6 +23,7 @@ const Button = styled.button`
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     transition: box-shadow 0.25s;
     margin: 20px;
+    z-index: 9;
     ${props => props.clickable ? `
         &:hover {
             cursor: pointer;
