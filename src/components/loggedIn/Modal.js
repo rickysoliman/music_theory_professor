@@ -21,14 +21,18 @@ const Background = styled.div`
 const ModalWrapper = styled.div`
     width: 90vw;
     height: 90vh;
+    // height: fit-content;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
     background-color: #e4ca9e;
     color: #000;
     display: flex;
-    // grid-template-columns: 1fr 1fr;
     position: relative;
     z-index: 10;
     border-radius: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    // max-height: calc(100vh);
+    // overflow: hidden;
 `;
 
 const ModalContent = styled.div`
@@ -39,17 +43,22 @@ const ModalContent = styled.div`
     line-height: 1.8;
     color: #141414;
     width: 100%;
+    height: fit-content;
+    margin: 20px;
 `;
 
 const CloseModalButton = styled(MdClose)`
     cursor: pointer;
-    position: absolute;
+    // position: absolute;
     top: 20px;
     right: 20p;
     width: 32px;
     height: 32px;
     padding: 0;
     z-index: 10px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 `;
 
 const Modal = props => {
@@ -80,7 +89,6 @@ const Modal = props => {
                         <Quiz close={areYouSure} quizType={props.quizType}/>
                     </ModalContent>
                     <CloseModalButton aria-label="Close modal" onClick={areYouSure}>X</CloseModalButton>
-                    {/* <CloseModalButton aria-label="Close modal" onClick={hideModal}>X</CloseModalButton> */}
                 </ModalWrapper>
             </animated.div>
         </Background>

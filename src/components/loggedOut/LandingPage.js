@@ -22,8 +22,8 @@ const LandingPage = () => {
                             <img alt="Music Theory Professor" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/musictheorylogo.png"></img>
                         </NavLink>
                         <div id="navLinks">
-                            <NavLink className="navLink" to="/about">About</NavLink>
                             <NavLink className="navLink" exact to="/">Home</NavLink>
+                            <NavLink className="navLink" to="/about">About</NavLink>
                         </div>
                     </div>
                     <div id="loggedOutContent">

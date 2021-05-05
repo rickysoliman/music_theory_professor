@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Piano from '../Piano';
 import QuestionsAndAnswers from './QuestionsAndAnswers';
+import Results from './Results';
 
 class Quiz extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ class Quiz extends Component {
             answers: [],
             pendingAnswer: this.props.quizType === 'Chords' ? [] : null,
             index: 0,
-            inProgress: false
+            inProgress: false,
+            displayResults: false
         };
 
         this.shuffle = this.shuffle.bind(this);
@@ -26,7 +28,12 @@ class Quiz extends Component {
         this.calculateGrade = this.calculateGrade.bind(this);
         this.returnToHome = this.returnToHome.bind(this);
         this.mostRecentlySelected = this.mostRecentlySelected.bind(this);
+        this.toggleDisplayResults = this.toggleDisplayResults.bind(this);
     }
+
+    toggleDisplayResults = () => {
+        this.setState({ displayResults: !this.state.displayResults });
+    };
 
     calculateScore = () => {
         let questions = this.state.questions[this.props.quizType],
@@ -54,10 +61,13 @@ class Quiz extends Component {
 
         let percentage = Math.round(score / questions.length * 100),
             results = {
+                questions,
+                answers,
                 percentage,
+                quizType: this.props.quizType,
                 right: score,
                 totalQuestions: questions.length,
-                grade: this.calculateGrade(percentage)
+                grade: this.calculateGrade(percentage),
             };
         return results;
     }
@@ -181,7 +191,7 @@ class Quiz extends Component {
             // quiz hasn't begun
             if (this.state.index === 0) {
                 return (       
-                    <div className='quiz'>
+                    <div className='quizIntro'>
                         <img alt="owl" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/loneowllogo.png" style={{ width: '125px', height: '125px' }}></img>
                         <h2 className='quizIntro'>{intros[quizType]}</h2>
                         <button className='quizButton' onClick={this.begin}>Begin Quiz</button>
@@ -205,6 +215,8 @@ class Quiz extends Component {
                         <p>Your score is <b>{results.percentage}%</b>.</p>
                         <p>Your grade is <b>{results.grade}</b>.</p>
                         <button style={{ margin: '20px' }} onClick={this.returnToHome} className='quizButton'>Return to Home</button>
+                        <button style={{ margin: '20px' }} className='quizButton' onClick={this.toggleDisplayResults}>{this.state.displayResults ? 'Hide Results' : 'View Results'}</button>
+                        <Results display={this.state.displayResults} results={JSON.stringify(results)} quizType={this.props.quizType}/>
                     </div>
                 )
             }

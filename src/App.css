@@ -71,10 +71,22 @@ body {
   background-color: #191414;
 }
 
+#navLinks {
+  display: flex;
+}
+
 .navLink {
   float: right;
   color: #ae9882;
   font-family: cursive;
+}
+
+#centerLinks {
+  float: center;
+}
+
+#rightLinks {
+  float: right;
 }
 
 #logoutButton {
@@ -328,6 +340,13 @@ a:hover {
 }
 
 .quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.quizIntro {
   display: flex;
   flex-direction: column;
   justify-content: center;

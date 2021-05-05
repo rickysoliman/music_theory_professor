@@ -12,7 +12,6 @@ import Footer from '../Footer';
 import About from '../About';
 import QuizMenu from './quizzes/QuizMenu';
 import Courses from './courses/Courses';
-import NavigationButton from './NavigationButton';
 
 const LoggedIn = () => {
     const { isAuthenticated } = useAuth0();
@@ -24,22 +23,21 @@ const LoggedIn = () => {
                         <img alt="Music Theory Professor" src="https://musictheoryprofessor.s3-us-west-1.amazonaws.com/musictheorylogo.png"></img>
                     </NavLink>
                     <div id="navLinks">
-                        <LogoutButton/>
-                        <NavLink className="navLink" to="/about">About</NavLink>
-                        <NavLink className="navLink" to="/profile">Profile</NavLink>
-                        <NavLink className="navLink" exact to="/">Home</NavLink>
+                        <div id="leftLinks"></div>
+                        <div id="centerLinks">
+                            <NavLink className="navLink" to="/quizzes">Quizzes</NavLink>
+                            <NavLink className="navLink" to="/courses">Courses</NavLink>
+                            <NavLink className="navLink" exact to="/">Home</NavLink>
+                        </div>
+                        <div id="rightLinks">
+                            <LogoutButton />
+                            <NavLink className="navLink" to="/about">About</NavLink>
+                            <NavLink className="navLink" to="/profile">Profile</NavLink>
+                        </div>
                     </div>
                 </div>
-                <div id="navButtons">
-                    <NavLink className="navLink" to="/quizzes">{
-                        <NavigationButton type='Quizzes' />
-                    }</NavLink>
-                    <NavLink className="navLink" to="/courses">{
-                        <NavigationButton type='Courses' />
-                    }</NavLink>
-                </div>
                 <div id="loggedInContent">
-                    <Route path="/quizzes" render={() => <QuizMenu authenticated={isAuthenticated}/>}/>
+                    <Route path="/quizzes" render={() => <QuizMenu authenticated={isAuthenticated}/>} />
                     <Route path="/courses" component={Courses} />
                     <Route exact path="/" component={Home}/>
                     <Route path="/profile" component={Profile}/>
