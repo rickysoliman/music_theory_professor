@@ -49,7 +49,7 @@ const ModalContent = styled.div`
 
 const CloseModalButton = styled(MdClose)`
     cursor: pointer;
-    // position: absolute;
+    position: absolute;
     top: 20px;
     right: 20p;
     width: 32px;
@@ -57,7 +57,7 @@ const CloseModalButton = styled(MdClose)`
     padding: 0;
     z-index: 10px;
     position: -webkit-sticky;
-    position: sticky;
+    // position: sticky;
     top: 0;
 `;
 

@@ -12,25 +12,24 @@ const Results = props => {
     };
 
     let results = JSON.parse(props.results);
-        let { questions, answers, quizType } = results, correct;
-        console.log(results);
-        let comparisons = questions.map((question, i) => {
+    let { questions, answers, quizType } = results, correct;
+    let comparisons = questions.map((question, i) => {
             let answer = answers[i];
             if (quizType === 'Chords') {
                 correct = compareArrays(question.answer, answers[i]);
-                return <IndividualQuestionResults key={i} number={i + 1} question={question.question} studentAnswer={answer} correctAnswer={question.answer} correct={correct} quizType={props.quizType}/>
+                return <IndividualQuestionResults key={i} number={i + 1} question={question.question} correct={correct} quizType={props.quizType}/>
             } else if (quizType === 'Note Names') {
                 correct = question === answer;
-                return <IndividualQuestionResults key={i} number={i + 1} question={question} studentAnswer={answer} correctAnswer={question} correct={correct} quizType={props.quizType} />
+                return <IndividualQuestionResults key={i} number={i + 1} question={question} correct={correct} quizType={props.quizType} />
             } else if (quizType === 'Intervals') {
                 correct = question.answer === answer;
-                return <IndividualQuestionResults key={i} number={i + 1} question={question.question} studentAnswer={answer} correctAnswer={question.answer} correct={correct} quizType={props.quizType} />
+                return <IndividualQuestionResults key={i} number={i + 1} question={question.question} correct={correct} quizType={props.quizType} />
             };
         });
     return (
         props.display ? (
 
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start'}}>{comparisons}</div>
+            <div>{comparisons}</div>
 
         ) : null
     );
