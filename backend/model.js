@@ -2,24 +2,36 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-// let detail = new Schema({
-//     name: {
-//         type: String
-//     },
-//     age: {
-//         type: Number
-//     }
-// });
-
-let user = new Schema({
-    firstName: String,
-    lastName: String,
-    email: String,
-    profilePic: String,
-    quizScores: [{
-        quizType: String,
-        score: Number
-    }]
+let detail = new Schema({
+    name: {
+        type: String
+    },
+    age: {
+        type: Number
+    }
 });
 
-module.exports = mongoose.model("user", user);
+// let user = new Schema({
+//     firstName: {
+//         type: String
+//     },
+//     lastName: {
+//         type: String
+//     },
+//     email: {
+//         type: String
+//     },
+//     profilePic: {
+//         type: String
+//     },
+//     quizScores: [{
+//         quizType: {
+//             type: String
+//         },
+//         score: {
+//             type: Number
+//         }
+//     }]
+// });
+
+module.exports = mongoose.model("detail", detail);
