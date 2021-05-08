@@ -11,7 +11,7 @@ import Profile from './Profile';
 import Footer from '../Footer';
 import About from '../About';
 import QuizMenu from './quizzes/QuizMenu';
-import Courses from './courses/Courses';
+// import Courses from './courses/Courses';
 
 const LoggedIn = () => {
     const { isAuthenticated } = useAuth0();
@@ -26,7 +26,7 @@ const LoggedIn = () => {
                         <div id="leftLinks"></div>
                         <div id="centerLinks">
                             <NavLink className="navLink" to="/quizzes">Quizzes</NavLink>
-                            <NavLink className="navLink" to="/courses">Courses</NavLink>
+                            {/* <NavLink className="navLink" to="/courses">Courses</NavLink> */}
                             <NavLink className="navLink" exact to="/">Home</NavLink>
                         </div>
                         <div id="rightLinks">
@@ -38,7 +38,7 @@ const LoggedIn = () => {
                 </div>
                 <div id="loggedInContent">
                     <Route path="/quizzes" render={() => <QuizMenu authenticated={isAuthenticated}/>} />
-                    <Route path="/courses" component={Courses} />
+                    {/* <Route path="/courses" component={Courses} /> */}
                     <Route exact path="/" component={Home}/>
                     <Route path="/profile" component={Profile}/>
                     <Route path="/about" component={About}/>

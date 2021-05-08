@@ -24,7 +24,7 @@ const Results = props => {
             } else if (quizType === 'Intervals') {
                 correct = question.answer === answer;
                 return <IndividualQuestionResults key={i} number={i + 1} question={question.question} correct={correct} quizType={props.quizType} />
-            };
+            } else return null;
         });
     return (
         props.display ? (
