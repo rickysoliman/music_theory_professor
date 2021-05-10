@@ -1,5 +1,6 @@
 import React from 'react';
 import IndividualQuestionResults from './IndividualQuestionResults';
+import { TransitionGroup } from 'react-transition-group';
 
 const Results = props => {
     const compareArrays = (x, y) => {
@@ -28,8 +29,13 @@ const Results = props => {
         });
     return (
         props.display ? (
-
-            <div>{comparisons}</div>
+            <TransitionGroup
+                transitionName="example"
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={300}
+            >
+                {comparisons}
+            </TransitionGroup>
 
         ) : null
     );
