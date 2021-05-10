@@ -2,14 +2,18 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-let detail = new Schema({
-    name: {
-        type: String
-    },
-    age: {
-        type: Number
-    }
+const userSchema = new Schema({
+    name: String
 });
+
+// let detail = new Schema({
+//     name: {
+//         type: String
+//     },
+//     age: {
+//         type: Number
+//     }
+// });
 
 // let user = new Schema({
 //     firstName: {
@@ -34,4 +38,4 @@ let detail = new Schema({
 //     }]
 // });
 
-module.exports = mongoose.model("detail", detail);
+module.exports = mongoose.model('User', userSchema);
