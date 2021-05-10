@@ -17,24 +17,19 @@ const Home = () => {
             .catch(err => console.log(err));
     };
 
+    const postData = data => {
+        axios.post('http://localhost:3001/postData')
+            .then(res => {
+                res.send('post data');
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
     useEffect(() => {
         getData();
     }, []);
-
-    /*
-    const [languages, setLanguages] = useState([]);
-    useEffect(() => {
-      getLanguages().then(data => {
-         setLanguages(data.languages)
-      });
-
-      console.log(languages);
-    }, []);
-    */
-
-
-
-    // getData();
 
     // logged in
     if (isAuthenticated) {
@@ -55,6 +50,8 @@ const Home = () => {
                     <p>is the best place to test your music theory knowledge and ear training abilities.</p>
                     <LoginButton message='Get Started!' />
                 </div>
+                {/* <input type="text" id="name"></input>
+                <button onClick={}>Post</button> */}
             </div>
         )
     }

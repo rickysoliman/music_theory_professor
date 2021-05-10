@@ -1,9 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const uri = 'mongodb+srv://rickysoliman:C%23minor7@cluster0.n5uas.mongodb.net/testDB?retryWrites=true&w=majority';
 
@@ -23,7 +27,13 @@ mongoose.connection.on('connected', () => {
 // Schema
 const { Schema } = mongoose;
 const userSchema = new Schema({
-    name: String
+    firstName: String,
+    lastName: String,
+    email: String,
+    quizScores: [{
+        quizType: String,
+        score: Number
+    }]
 });
 
 // Model
@@ -42,6 +52,19 @@ app.get('/getData', (req, res) => {
         .catch(err => {
             console.log(err);
         });
+});
+
+app.post('/postData', (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    let body = new User(req.body);
+    body.save()
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    res.end();
 });
 
 app.listen(PORT, () => {
