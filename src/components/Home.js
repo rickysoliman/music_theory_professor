@@ -5,12 +5,15 @@ import LoginButton from './loggedOut/LoginButton';
 
 const Home = () => {
     const { isAuthenticated, user } = useAuth0();
-    const [data, setData] = useState([]);
+    const [ data, setData ] = useState([]);
     console.log(user);
 
     const getData = () => {
-        axios.get('http://localhost:4000/getData')
-            .then(res => setData(JSON.stringify(res.data)))
+        axios.get('http://localhost:3001/getData')
+            .then(res => {
+                console.log(res.data);
+                setData(JSON.stringify(res.data));
+            })
             .catch(err => console.log(err));
     };
 

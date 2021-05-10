@@ -1,35 +1,49 @@
 const express = require('express');
-const app = express();
-const cors = require('cors');
-const PORT = 4000;
 const mongoose = require('mongoose');
-const User = require('./model');
-const router = express.Router();
+const morgan = require('morgan');
 
-app.use(cors());
-app.use('/', router);
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-mongoose.connect('mongodb://localhost/test', {
+const uri = 'mongodb+srv://rickysoliman:C%23minor7@cluster0.n5uas.mongodb.net/testDB?retryWrites=true&w=majority';
+
+mongoose.connect(uri, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    auth: {
+        user: 'rickysoliman',
+        password: 'C#minor7'
+    }
 });
 
-const connection = mongoose.connection;
-
-connection.once('open', () => {
-    console.log(`Connection with MongoDB was successful`);
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose is connected');
 });
 
-router.route('/getData').get((req, res) => {
-    User.find({}, (err, result) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(result);
-        };
-    });
+// Schema
+const { Schema } = mongoose;
+const userSchema = new Schema({
+    name: String
+});
+
+// Model
+const User = mongoose.model('User', userSchema);
+
+// HTTP request logger
+app.use(morgan('tiny'));
+
+// Routes
+app.get('/getData', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    User.find({})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`listening at https://localhost:${PORT}`);
 });
