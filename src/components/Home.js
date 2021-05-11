@@ -6,7 +6,14 @@ import LoginButton from './loggedOut/LoginButton';
 const Home = () => {
     const { isAuthenticated, user } = useAuth0();
     const [ data, setData ] = useState([]);
+    const [ postRequestData, setPostRequestData ] = useState({});
     console.log(user);
+
+    const handleChange = e => {
+        let value = document.getElementById(e.target.id).value;
+        setPostRequestData(value);
+        console.log(postRequestData);
+    };
 
     const getData = () => {
         axios.get('http://localhost:3001/getData')
@@ -18,9 +25,9 @@ const Home = () => {
     };
 
     const postData = data => {
-        axios.post('http://localhost:3001/postData')
-            .then(res => {
-                res.send('post data');
+        axios.post('http://localhost:3001/postData', JSON.parse(data))
+            .then(() => {
+                console.log('posted data');
             })
             .catch(err => {
                 console.log(err);
@@ -50,8 +57,8 @@ const Home = () => {
                     <p>is the best place to test your music theory knowledge and ear training abilities.</p>
                     <LoginButton message='Get Started!' />
                 </div>
-                {/* <input type="text" id="name"></input>
-                <button onClick={}>Post</button> */}
+                {/* <input type="text" id="data" onChange={handleChange}></input>
+                <button onClick={() => postData(postRequestData)}>Post</button> */}
             </div>
         )
     }

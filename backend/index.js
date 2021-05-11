@@ -2,12 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const jsonParser = bodyParser.json();
+app.use(jsonParser);
 
 const uri = 'mongodb+srv://rickysoliman:C%23minor7@cluster0.n5uas.mongodb.net/testDB?retryWrites=true&w=majority';
 
@@ -43,6 +46,8 @@ const User = mongoose.model('User', userSchema);
 app.use(morgan('tiny'));
 
 // Routes
+
+// get all data
 app.get('/getData', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     User.find({})
@@ -54,8 +59,23 @@ app.get('/getData', (req, res) => {
         });
 });
 
+// get quiz scores for given user
+app.get('/getQuizScores/:firstName', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    let firstName = req.params.firstName;
+    User.find({ firstName })
+        .then(response => {
+            res.send(response[0].quizScores);
+            res.end();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+// save a new user to the database
 app.post('/postData', (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     let body = new User(req.body);
     body.save()
         .then(response => {
@@ -64,7 +84,6 @@ app.post('/postData', (req, res) => {
         .catch(error => {
             console.log(error);
         });
-    res.end();
 });
 
 app.listen(PORT, () => {
