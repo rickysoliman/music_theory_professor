@@ -6,17 +6,11 @@ import LoginButton from './loggedOut/LoginButton';
 const Home = () => {
     const { isAuthenticated, user } = useAuth0();
     const [ data, setData ] = useState([]);
-    const [ postRequestData, setPostRequestData ] = useState({});
     console.log(user);
 
-    const handleChange = e => {
-        let value = document.getElementById(e.target.id).value;
-        setPostRequestData(value);
-        console.log(postRequestData);
-    };
-
-    const getData = () => {
-        axios.get('http://localhost:3001/getData')
+    // retrieves all data on user via email
+    const getData = email => {
+        axios.get(`/getByEmail/${email}`)
             .then(res => {
                 console.log(res.data);
                 setData(JSON.stringify(res.data));
@@ -24,8 +18,15 @@ const Home = () => {
             .catch(err => console.log(err));
     };
 
-    const postData = data => {
-        axios.post('http://localhost:3001/postData', JSON.parse(data))
+    // posts the user in the database (if not already there)
+    const postData = user => {
+        let data = {
+            firstName: user.given_name,
+            lastName: user.family_name,
+            email: user.email,
+            quizScores: []
+        };
+        axios.post('/postData', data)
             .then(() => {
                 console.log('posted data');
             })
@@ -35,7 +36,25 @@ const Home = () => {
     };
 
     useEffect(() => {
-        getData();
+        if (!isAuthenticated) return null;
+
+        let isMounted = true;
+
+        axios.get(`/getByEmail/${user.email}`)
+            .then(res => {
+                let data = res.data;
+                if (data.length === 0) {
+                    console.log('new user');
+                    postData(user);
+                } else {
+                    console.log('user already exists');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        return () => isMounted = false;
     }, []);
 
     // logged in
@@ -44,9 +63,9 @@ const Home = () => {
             <div id="loggedInHomePage">
                 <h1 style={{ color: 'white' }}>Welcome back, {user.given_name || user.nickname}!</h1>
                 <p style={{ color: 'white' }}>{user.email_verified ? '' : 'Make sure to verify your email.'}</p>
-                <h1 id="postData">{data}</h1>
+                <div style={{ color: 'white' }}>{data}</div>
             </div>
-        )
+        );
     // not logged in
     } else {
         return (
@@ -57,11 +76,9 @@ const Home = () => {
                     <p>is the best place to test your music theory knowledge and ear training abilities.</p>
                     <LoginButton message='Get Started!' />
                 </div>
-                {/* <input type="text" id="data" onChange={handleChange}></input>
-                <button onClick={() => postData(postRequestData)}>Post</button> */}
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 export default Home;

@@ -8,9 +8,9 @@ const Profile = () => {
     let [ quizScores, setQuizScores ] = useState([]);
 
     const getQuizScores = () => {
-        let { given_name } = user;
+        let { email } = user;
 
-        axios.get(`/getQuizScores/${given_name}`)
+        axios.get(`/getQuizScores/${email}`)
             .then(res => {
                 setQuizScores(res.data);
             })
@@ -18,7 +18,7 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        getQuizScores()
+        getQuizScores();
     }, []);
 
     const calculateQuizAverages = scores => {
@@ -68,6 +68,7 @@ const Profile = () => {
     // logged in
     if (isAuthenticated) {
         let scores = calculateQuizAverages(quizScores);
+
         let averages = scores.map((quiz, i) => {
             let { quizType, average } = quiz;
             return (
@@ -82,7 +83,7 @@ const Profile = () => {
                 <div id="profile">
                     <h1>{user.name}</h1>
                     <img src={user.picture} alt={user.name}></img>
-                    <div id="quizScores">{!averages ? [] : averages}</div>
+                    <div id="quizScores">{scores.length === 0 ? <p>You haven't taken any quizzes yet, {user.given_name || user.nickname}!</p> : averages}</div>
                 </div>
             </div>
         )

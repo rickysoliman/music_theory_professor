@@ -59,13 +59,41 @@ app.get('/getData', (req, res) => {
         });
 });
 
-// get quiz scores for given user
-app.get('/getQuizScores/:firstName', (req, res) => {
+// get quiz scores for given user by email
+app.get('/getQuizScores/:email', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    let email = req.params.email;
+    User.find({ email })
+        .then(response => {
+            res.send(response[0].quizScores);
+            res.end();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+// get all info for a given user
+app.get('/getData/:firstName', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     let firstName = req.params.firstName;
     User.find({ firstName })
         .then(response => {
-            res.send(response[0].quizScores);
+            res.send(response);
+            res.end();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+// get a user by email
+app.get('/getByEmail/:email', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    let email = req.params.email;
+    User.find({ email })
+        .then(response => {
+            res.send(response);
             res.end();
         })
         .catch(err => {
@@ -80,6 +108,7 @@ app.post('/postData', (req, res) => {
     body.save()
         .then(response => {
             console.log(response);
+            res.send('done');
         })
         .catch(error => {
             console.log(error);
