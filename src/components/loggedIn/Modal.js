@@ -3,6 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import Quiz from './quizzes/Quiz';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Background = styled.div`
     width: 100vw;
@@ -62,6 +63,8 @@ const CloseModalButton = styled(MdClose)`
 `;
 
 const Modal = props => {
+    const { user } = useAuth0();
+
     let showModal = props.quizType !== null;
 
     if (showModal) document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
@@ -86,7 +89,7 @@ const Modal = props => {
             <animated.div style={animation}>
                 <ModalWrapper showModal={showModal}>
                     <ModalContent>
-                        <Quiz close={areYouSure} quizType={props.quizType}/>
+                        <Quiz id={props.id} close={areYouSure} quizType={props.quizType}/>
                     </ModalContent>
                     <CloseModalButton aria-label="Close modal" onClick={areYouSure}>X</CloseModalButton>
                 </ModalWrapper>

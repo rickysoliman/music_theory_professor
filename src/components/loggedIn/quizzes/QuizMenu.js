@@ -36,7 +36,7 @@ class QuizMenu extends Component {
                 <div id="quizMenu">
                     <h1 style={{ color: 'white', margin: '20px' }}>What would you like to be quizzed on today?</h1>
                     <div className="menuButtons">{quizButtons}</div>
-                    <Modal close={this.closeModal} quizType={this.state.quiz}/>
+                    <Modal id={this.props.id} close={this.closeModal} quizType={this.state.quiz}/>
                 </div>
             )
         } else {

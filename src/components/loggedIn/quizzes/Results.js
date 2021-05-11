@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import IndividualQuestionResults from './IndividualQuestionResults';
-import { TransitionGroup } from 'react-transition-group';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 const Results = props => {
+    const { isAuthenticated } = useAuth0();
+
     const compareArrays = (x, y) => {
         console.log({x, y});
         if (x.length !== y.length) return false;
@@ -27,15 +30,15 @@ const Results = props => {
                 return <IndividualQuestionResults key={i} number={i + 1} question={question.question} correct={correct} quizType={props.quizType} />
             } else return null;
         });
+
+    useEffect(() => {
+        if (!isAuthenticated) return null;
+    });
+
     return (
         props.display ? (
-            <TransitionGroup
-                transitionName="example"
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={300}
-            >
-                {comparisons}
-            </TransitionGroup>
+
+            <div>{comparisons}</div>
 
         ) : null
     );

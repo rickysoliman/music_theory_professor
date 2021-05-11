@@ -6,6 +6,7 @@ import LoginButton from './loggedOut/LoginButton';
 const Home = () => {
     const { isAuthenticated, user } = useAuth0();
     const [ data, setData ] = useState([]);
+    const [ id, setId ] = useState(null);
     console.log(user);
 
     // retrieves all data on user via email
@@ -27,8 +28,9 @@ const Home = () => {
             quizScores: []
         };
         axios.post('/postData', data)
-            .then(() => {
+            .then(res => {
                 console.log('posted data');
+                res.send(res);
             })
             .catch(err => {
                 console.log(err);
@@ -48,6 +50,8 @@ const Home = () => {
                     postData(user);
                 } else {
                     console.log('user already exists');
+                    setId(data[0]._id);
+                    user.id = data[0]._id;
                 }
             })
             .catch(err => {
@@ -62,6 +66,7 @@ const Home = () => {
         return (
             <div id="loggedInHomePage">
                 <h1 style={{ color: 'white' }}>Welcome back, {user.given_name || user.nickname}!</h1>
+                <div style={{ color: 'white' }}>user id: {id}</div>
                 <p style={{ color: 'white' }}>{user.email_verified ? '' : 'Make sure to verify your email.'}</p>
                 <div style={{ color: 'white' }}>{data}</div>
             </div>

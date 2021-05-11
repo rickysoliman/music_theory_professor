@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Route,
     NavLink,
     HashRouter
 } from "react-router-dom";
+import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import LogoutButton from './LogoutButton';
 import Home from '../Home';
@@ -14,7 +15,21 @@ import QuizMenu from './quizzes/QuizMenu';
 // import Courses from './courses/Courses';
 
 const LoggedIn = () => {
-    const { isAuthenticated } = useAuth0();
+    const { isAuthenticated, user } = useAuth0();
+    const [ id, setId ] = useState(null);
+
+    useEffect(() => {
+        axios.get(`/getByEmail/${user.email}`)
+            .then(res => {
+                console.log('from loggedIn.js');
+                console.log(res.data[0]);
+                setId(res.data[0]._id);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    });
+
     return (
         <div id="loggedInContainer">
             <HashRouter>
@@ -37,7 +52,7 @@ const LoggedIn = () => {
                     </div>
                 </div>
                 <div id="loggedInContent">
-                    <Route path="/quizzes" render={() => <QuizMenu authenticated={isAuthenticated}/>} />
+                    <Route path="/quizzes" render={() => <QuizMenu id={id} authenticated={isAuthenticated}/>} />
                     {/* <Route path="/courses" component={Courses} /> */}
                     <Route exact path="/" component={Home}/>
                     <Route path="/profile" component={Profile}/>

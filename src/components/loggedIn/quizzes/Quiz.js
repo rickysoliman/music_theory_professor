@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Piano from '../Piano';
 import QuestionsAndAnswers from './QuestionsAndAnswers';
 import Results from './Results';
+import axios from 'axios';
 
 class Quiz extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class Quiz extends Component {
         this.returnToHome = this.returnToHome.bind(this);
         this.mostRecentlySelected = this.mostRecentlySelected.bind(this);
         this.toggleDisplayResults = this.toggleDisplayResults.bind(this);
+        this.saveQuizScores = this.saveQuizScores.bind(this);
     }
 
     toggleDisplayResults = () => {
@@ -164,6 +166,19 @@ class Quiz extends Component {
         }, this.props.end);
     }
 
+    saveQuizScores = scores => {
+        scores.id = this.props.id;
+        axios.post('/postQuizResults', scores)
+            .then(res => {
+                console.log('successfuly saved quiz results');
+                console.log(res.data);
+                this.returnToHome();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
     returnToHome = () => {
         window.location.href = '/';
     }
@@ -200,6 +215,7 @@ class Quiz extends Component {
             // quiz is over
             } else {
                 let results = this.calculateScore();
+                console.log({ results });
                 let outros = {
                     'A': 'Great job!',
                     'B': 'Nice work!',
@@ -214,7 +230,7 @@ class Quiz extends Component {
                         <p>You answered <b>{results.right}</b> out of <b>{results.totalQuestions}</b> questions correctly.</p><br/>
                         <p>Your score is <b>{results.percentage}%</b>.</p>
                         <p>Your grade is <b>{results.grade}</b>.</p>
-                        <button style={{ margin: '20px' }} onClick={this.returnToHome} className='quizButton'>Return to Home</button>
+                        <button style={{ margin: '20px' }} onClick={() => this.saveQuizScores(results)} className='quizButton'>Return to Home</button>
                         <button style={{ margin: '20px' }} className='quizButton' onClick={this.toggleDisplayResults}>{this.state.displayResults ? 'Hide Results' : 'View Results'}</button>
                         <Results display={this.state.displayResults} results={JSON.stringify(results)} quizType={this.props.quizType}/>
                     </div>

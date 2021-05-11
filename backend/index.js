@@ -93,6 +93,7 @@ app.get('/getByEmail/:email', (req, res) => {
     let email = req.params.email;
     User.find({ email })
         .then(response => {
+            console.log(response);
             res.send(response);
             res.end();
         })
@@ -108,11 +109,31 @@ app.post('/postData', (req, res) => {
     body.save()
         .then(response => {
             console.log(response);
-            res.send('done');
+            res.send(response.body);
         })
         .catch(error => {
             console.log(error);
         });
+});
+
+// save a user's quiz results
+app.post('/postQuizResults', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    let data = {
+        quizType: req.body.quizType,
+        score: req.body.percentage
+    };
+    User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $push: { quizScores: data }},
+    )
+    .then(response => {
+        console.log('updated!');
+        res.send(response);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 });
 
 app.listen(PORT, () => {
