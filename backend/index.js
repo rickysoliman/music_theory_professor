@@ -12,6 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const jsonParser = bodyParser.json();
 app.use(jsonParser);
 
+mongoose.set('useFindAndModify', false);
+
 const uri = 'mongodb+srv://rickysoliman:C%23minor7@cluster0.n5uas.mongodb.net/testDB?retryWrites=true&w=majority';
 
 mongoose.connect(uri, {
@@ -93,7 +95,7 @@ app.get('/getByEmail/:email', (req, res) => {
     let email = req.params.email;
     User.find({ email })
         .then(response => {
-            console.log(response);
+            // console.log(response);
             res.send(response);
             res.end();
         })
@@ -114,6 +116,28 @@ app.post('/postData', (req, res) => {
         .catch(error => {
             console.log(error);
         });
+});
+
+/*
+db.Employee.update(
+    {"Employeeid" : 1},
+    {$set: { "EmployeeName" : "NewMartin"}});
+*/
+
+// edit a user's name
+app.post('/changeName', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    User.updateOne(
+        { _id: req.body.id },
+        { $set: { firstName: req.body.firstName, lastName: req.body.lastName } }
+    )
+    .then(response => {
+        console.log('updated first and last names');
+        console.log(response.body);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 });
 
 // save a user's quiz results

@@ -3,7 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import Quiz from './quizzes/Quiz';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
-import { useAuth0 } from '@auth0/auth0-react';
+// import { useAuth0 } from '@auth0/auth0-react';
 
 const Background = styled.div`
     width: 100vw;
@@ -63,7 +63,7 @@ const CloseModalButton = styled(MdClose)`
 `;
 
 const Modal = props => {
-    const { user } = useAuth0();
+    // const { user } = useAuth0();
 
     let showModal = props.quizType !== null;
 

@@ -21,8 +21,6 @@ const LoggedIn = () => {
     useEffect(() => {
         axios.get(`/getByEmail/${user.email}`)
             .then(res => {
-                console.log('from loggedIn.js');
-                console.log(res.data[0]);
                 setId(res.data[0]._id);
             })
             .catch(err => {
@@ -55,7 +53,7 @@ const LoggedIn = () => {
                     <Route path="/quizzes" render={() => <QuizMenu id={id} authenticated={isAuthenticated}/>} />
                     {/* <Route path="/courses" component={Courses} /> */}
                     <Route exact path="/" component={Home}/>
-                    <Route path="/profile" component={Profile}/>
+                    <Route path="/profile" render={() => <Profile id={id} />}/>
                     <Route path="/about" component={About}/>
                 </div>
             </HashRouter>

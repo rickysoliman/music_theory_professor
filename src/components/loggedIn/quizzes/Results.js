@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import IndividualQuestionResults from './IndividualQuestionResults';
 import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
+// import axios from 'axios';
 
 const Results = props => {
     const { isAuthenticated } = useAuth0();
