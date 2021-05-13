@@ -8,7 +8,10 @@ const Profile = props => {
     const { isAuthenticated, user } = useAuth0();
     console.log(user);
     let [ quizScores, setQuizScores ] = useState([]);
+    let [ firstName, setFirstName ] = useState('');
+    let [ lastName, setLastName ] = useState('');
     let [ edit, setEdit ] = useState(false);
+    let [ overallAverage, setOverallAverage ] = useState(0);
 
     const changeFirstName = name => {
         user.firstName = name;
@@ -25,31 +28,46 @@ const Profile = props => {
             lastName,
             id
         };
-        console.log({ obj });
         axios.post('/changeName', obj)
             .then(res => {
                 setEdit(false);
-                // res.end();
+                res.end();
             })
             .catch(err => {
                 console.log(err);
             });
     };
 
+    const calculateOverallAverage = scores => {
+        let numOfQuizzes = scores.length, totalScore = 0;
+        for (let i = 0; i < scores.length; i++) {
+            let quiz = scores[i];
+            totalScore += quiz.score;
+        }
+
+        let average = Math.round(totalScore / numOfQuizzes);
+        return average;
+    };
+
     const getQuizScores = () => {
         let { email } = user;
 
-        axios.get(`/getQuizScores/${email}`)
+        axios.get(`/getByEmail/${email}`)
             .then(res => {
-                setQuizScores(res.data);
+                let { firstName, lastName, quizScores } = res.data[0];
+                setFirstName(firstName);
+                setLastName(lastName);
+                setQuizScores(quizScores);
+                let overallAverage = calculateOverallAverage(quizScores);
+                setOverallAverage(overallAverage);
             })
             .catch(err => console.log(err));
     };
 
-    useEffect(getQuizScores, []);
+    useEffect(getQuizScores, [user]);
 
     const calculateQuizAverages = scores => {
-        if (quizScores.length === 0) return [];
+        if (scores.length === 0) return [];
 
         let averages = {
             'Note Names': {
@@ -95,6 +113,8 @@ const Profile = props => {
     // logged in
     if (isAuthenticated) {
         if (!edit) {
+            if (!quizScores) return null;
+            if (quizScores.length === 0) return null;
             let scores = calculateQuizAverages(quizScores);
 
             let averages = scores.map((quiz, i) => {
@@ -109,19 +129,13 @@ const Profile = props => {
             return (
                 <div className="infoSquare">
                     <div id="profile">
-                        <h1>{'nickname' in user ? user.name : `${user.firstName} ${user.lastName}`}</h1>
-                        <button style={{
-                            float: 'right',
-                            color: '#f7ecdb',
-                            backgroundColor: '#1a1515',
-                            borderRadius: '5px',
-                            border: 'transparent',
-                            padding: '20px',
-                            fontFamily:'Arial',
-                            transition: 'box-shadow 0.25s'
-                        }} onClick={() => setEdit(true)}>Edit Profile Info</button>
-                        <img style={{ width: '200px', height: '200px' }} src={user.picture} alt={user.name}></img>
+                        {/* <h1>{'nickname' in user ? user.name : `${user.firstName} ${user.lastName}`}</h1> */}
+                        <h1>{firstName} {lastName}</h1>
+                        <img style={{ width: '150px', height: '150px', borderRadius: '5px', border: '2px solid black' }} src={user.picture} alt={user.name}></img>
                         <div id="quizScores">{scores.length === 0 ? <p>You haven't taken any quizzes yet, {user.given_name || user.nickname}!</p> : averages}</div>
+                        <div><b>Overall Average score:</b></div>
+                        <div>{overallAverage}%</div>
+                        <button id="editProfileInfoButton" onClick={() => setEdit(true)}>Edit Profile Info</button>
                     </div>
                 </div>
             );

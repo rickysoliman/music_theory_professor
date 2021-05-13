@@ -118,22 +118,16 @@ app.post('/postData', (req, res) => {
         });
 });
 
-/*
-db.Employee.update(
-    {"Employeeid" : 1},
-    {$set: { "EmployeeName" : "NewMartin"}});
-*/
-
 // edit a user's name
 app.post('/changeName', (req, res) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    console.log(req.body);
     User.updateOne(
         { _id: req.body.id },
         { $set: { firstName: req.body.firstName, lastName: req.body.lastName } }
     )
     .then(response => {
         console.log('updated first and last names');
-        console.log(response.body);
     })
     .catch(err => {
         console.log(err);

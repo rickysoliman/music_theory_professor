@@ -14,16 +14,28 @@ const EditAccountInfo = props => {
     };
 
     const handleSave = () => {
-        props.changeFirstName(firstName);
-        props.changeLastName(lastName);
-        props.save();
+        if (firstName !== '' && lastName !== '') {
+            props.changeFirstName(firstName);
+            props.changeLastName(lastName);
+            props.save();
+        } else if (firstName !== '' && lastName === '') {
+            props.changeFirstName(firstName);
+            props.save();
+        } else if (firstName === '' && lastName !== '') {
+            props.changeLastName(lastName);
+            props.save();
+        } else {
+            window.alert('Please fill out the form.');
+            return;
+        }
+        // props.save();
     };
 
     return (
-        <form>
-            <input id='firstName' placeholder='first name' onChange={handleChange}></input>
-            <input id='lastName' placeholder='last name' onChange={handleChange}></input>
-            <button onClick={handleSave}>Save</button>
+        <form id='editProfileInfoForm'>
+            <input className='editProfileInput' id='firstName' placeholder='first name' onChange={handleChange}></input>
+            <input className='editProfileInput' id='lastName' placeholder='last name' onChange={handleChange}></input>
+            <button id='saveProfileInfoForm' onClick={handleSave}>Save</button>
         </form>
     );
 };

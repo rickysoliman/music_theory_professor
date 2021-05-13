@@ -173,6 +173,46 @@ a:hover {
   align-items: flex-start;
 }
 
+#editProfileInfoButton {
+  float: right;
+  color: #1a1515;
+  background-color: transparent;
+  border-radius: 5px;
+  border: transparent;
+  padding: 10px;
+  font-family: Arial;
+  transition: box-shadow 0.25s;
+  font-size: 0.5rem;
+}
+#editProfileInfoButton:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#editProfileInfoForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.editProfileInput {
+  margin: 10px;
+  padding: 5px;
+}
+
+#saveProfileInfoForm {
+  background-color: #1a1515;
+  color: white;
+  border-radius: 10px;
+  border: transparent;
+  padding: 10px;
+}
+#saveProfileInfoForm:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 #loginButton {
   float: right;
   color: #f7ecdb;
