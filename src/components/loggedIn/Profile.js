@@ -13,6 +13,10 @@ const Profile = props => {
     let [ edit, setEdit ] = useState(false);
     let [ overallAverage, setOverallAverage ] = useState(0);
 
+    const closeWindow = () => {
+        setEdit(false);
+    };
+
     const changeFirstName = name => {
         user.firstName = name;
     };
@@ -142,7 +146,7 @@ const Profile = props => {
         } else {
             return (
                 <div className="infoSquare">
-                    <EditAccountInfo save={save} changeFirstName={changeFirstName} changeLastName={changeLastName} user={user}/>
+                    <EditAccountInfo close={closeWindow} save={save} changeFirstName={changeFirstName} changeLastName={changeLastName} user={user}/>
                 </div>
             );
         }

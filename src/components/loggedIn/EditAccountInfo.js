@@ -28,14 +28,16 @@ const EditAccountInfo = props => {
             window.alert('Please fill out the form.');
             return;
         }
-        // props.save();
     };
 
     return (
         <form id='editProfileInfoForm'>
             <input className='editProfileInput' id='firstName' placeholder='first name' onChange={handleChange}></input>
             <input className='editProfileInput' id='lastName' placeholder='last name' onChange={handleChange}></input>
-            <button id='saveProfileInfoForm' onClick={handleSave}>Save</button>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <button id='saveProfileInfoForm' onClick={handleSave}>Save</button>
+                <button id='saveProfileInfoForm' onClick={props.close}>Cancel</button>
+            </div>
         </form>
     );
 };
